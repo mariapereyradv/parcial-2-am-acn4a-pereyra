@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- APP -->
+    <string name="app_name">Leído</string>
+    <string name="app_subtitle">Tu diario literario personal</string>
+    <string name="app_tagline">Sin redes · Sin presión</string>
+
+    <!-- FILOSOFÍA -->
+    <string name="philosophy_quote">"La lectura es una experiencia personal.\nRecordar lo que leíste también debería serlo."</string>
+    <string name="philosophy_manifesto">Leído no es una red social.\n\nNo hay likes. No hay seguidores.\nNo hay presión por leer más.\n\nSolo un espacio para recordar\nqué leíste y qué sentiste.\n\nPrivado. Simple. Tuyo.</string>
+
+    <!-- ONBOARDING -->
+    <string name="welcome_title">Bienvenido a Leído</string>
+    <string name="welcome_message">Esto no es Goodreads.\nNo hay ratings. No hay reseñas públicas.\nNo hay "amigos" mirando qué leés.\n\nEs tu espacio.</string>
+
+    <!-- LOGIN -->
+    <string name="login_email">EMAIL</string>
+    <string name="login_password">CONTRASEÑA</string>
+    <string name="login_button">INICIAR SESIÓN</string>
+    <string name="login_register_prompt">¿No tenés cuenta?</string>
+    <string name="login_register_link">Registrate acá</string>
+    <string name="login_privacy">He leído y acepto la política de privacidad</string>
+    <string name="login_demo">Usuario demo: demo / 1234</string>
+
+    <!-- REGISTRO -->
+    <string name="register_name">NOMBRE DE USUARIO</string>
+    <string name="register_email">EMAIL</string>
+    <string name="register_password">CONTRASEÑA</string>
+    <string name="register_confirm_password">CONFIRMAR CONTRASEÑA</string>
+    <string name="register_button">REGISTRARSE</string>
+    <string name="register_login_prompt">¿Ya tenés cuenta?</string>
+    <string name="register_login_link">Iniciá sesión acá</string>
+
+    <!-- MAIN -->
+    <string name="main_title">Leído</string>
+    <string name="main_subtitle">Tu diario literario</string>
+    <string name="tab_leidos">📖 Leídos</string>
+    <string name="tab_deseados">⭐ Deseados</string>
+
+    <!-- AGREGAR LIBRO -->
+    <string name="add_book_title">Agregar Libro</string>
+    <string name="add_book_titulo">TÍTULO *</string>
+    <string name="add_book_autor">AUTOR</string>
+    <string name="add_book_editorial">EDITORIAL</string>
+    <string name="add_book_isbn">ISBN</string>
+    <string name="add_book_notas">TUS NOTAS</string>
+    <string name="add_book_notas_hint">Lo que sentiste, lo que te quedó, por qué te gustó (o no)</string>
+    <string name="add_book_privacy">🔒 Tus notas son privadas. Nadie más las verá.</string>
+    <string name="add_book_cancel">CANCELAR</string>
+    <string name="add_book_save">GUARDAR</string>
+
+    <!-- EMPTY STATES -->
+    <string name="empty_leidos_title">Tu primer libro</string>
+    <string name="empty_leidos_message">¿Cuál fue el último libro que leíste?\nEmpezá por ahí. Lo que sea.\n\nNo importa si fue hace un día o un año.\nNo importa si fue "importante" o no.\n\nSi lo leíste, merece estar acá.</string>
+
+    <string name="empty_deseados_title">Libros que querés leer</string>
+    <string name="empty_deseados_message">Todavía no agregaste ningún libro deseado.\n\nY está perfecto.\nTomate tu tiempo.\n\nEsto no es una carrera.\n\nCuando veas uno que te interese,\nagregalo acá para no olvidarte.</string>
+
+    <string name="empty_action_hint">👇 Tocá el botón de abajo para agregar</string>
+
+    <!-- MENSAJES -->
+    <string name="msg_libro_agregado_leidos">Libro agregado a Leídos</string>
+    <string name="msg_libro_agregado_deseados">Libro agregado a Deseados</string>
+    <string name="msg_libro_eliminado">Libro eliminado</string>
+    <string name="msg_marcado_leido">"%1$s" marcado como leído</string>
+    <string name="msg_campos_vacios">Por favor completa todos los campos</string>
+    <string name="msg_titulo_requerido">El título es obligatorio</string>
+
+    <!-- DIÁLOGOS -->
+    <string name="dialog_eliminar_title">Eliminar</string>
+    <string name="dialog_eliminar_message">¿Eliminar "%1$s"?</string>
+    <string name="dialog_eliminar_confirm">Eliminar</string>
+    <string name="dialog_cancelar">Cancelar</string>
+
+    <string name="dialog_opciones_marcar">Marcar como leído</string>
+    <string name="dialog_opciones_eliminar">Eliminar</string>
+
+    <!-- CONEXIÓN CON AURELIA -->
+    <string name="aurelia_connection_title">¿Sabías que Aurelia hace maridajes literarios?</string>
+    <string name="aurelia_connection_message">Podés pedirle que te recomiende el vino perfecto para tu próxima lectura</string>
+    <string name="aurelia_connection_button">Conocer Aurelia</string>
+
+    <!-- ACCESSIBILITY -->
+    <string name="cd_logo">Logo de Leído</string>
+    <string name="cd_profile">Perfil de usuario</string>
+    <string name="cd_add_book">Agregar libro</string>
+    <string name="cd_book_cover">Portada del libro</string>
+    <string name="cd_edit_book">Editar libro</string>
+    <string name="cd_delete_book">Eliminar libro</string>
+</resources>

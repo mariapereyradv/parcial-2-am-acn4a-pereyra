@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== PALETA AURELIA ADAPTADA A MATERIAL 3 ===== -->
+
+    <!-- Colores Primarios - Violeta (identidad principal) -->
+    <color name="primary">#7B1FA2</color>              <!-- Violeta base -->
+    <color name="primary_dark">#4A148C</color>         <!-- Índigo profundo -->
+    <color name="primary_light">#E1BEE7</color>        <!-- Violeta suave -->
+    <color name="on_primary">#FFFFFF</color>           <!-- Texto sobre violeta -->
+
+    <!-- Colores Secundarios - Rosa Neón (interacciones) -->
+    <color name="secondary">#FF6090</color>            <!-- Rosa neón -->
+    <color name="secondary_dark">#E84A7A</color>       <!-- Rosa oscuro -->
+    <color name="secondary_light">#FFD6E4</color>      <!-- Rosa pastel -->
+    <color name="on_secondary">#FFFFFF</color>         <!-- Texto sobre rosa -->
+
+    <!-- Colores Terciarios - Dorado (acentos especiales) -->
+    <color name="tertiary">#FFD740</color>             <!-- Dorado -->
+    <color name="tertiary_dark">#FFC107</color>        <!-- Dorado oscuro -->
+    <color name="tertiary_light">#FFF59D</color>       <!-- Dorado claro -->
+    <color name="on_tertiary">#4A148C</color>          <!-- Texto sobre dorado -->
+
+    <!-- Colores de Superficie -->
+    <color name="background">#F5F5F5</color>           <!-- Blanco lunar -->
+    <color name="surface">#FFFFFF</color>              <!-- Blanco puro -->
+    <color name="surface_variant">#E1BEE7</color>      <!-- Violeta muy claro -->
+    <color name="on_background">#2D2D2D</color>        <!-- Texto sobre fondo -->
+    <color name="on_surface">#2D2D2D</color>           <!-- Texto sobre surface -->
+
+    <!-- Colores de Texto -->
+    <color name="text_primary">#2D2D2D</color>         <!-- Negro suave -->
+    <color name="text_secondary">#757575</color>       <!-- Gris medio -->
+    <color name="text_tertiary">#B0B0B0</color>        <!-- Gris claro -->
+
+    <!-- Colores Adicionales del Ecosistema -->
+    <color name="coral">#FF9E80</color>                <!-- Coral (calidez) -->
+    <color name="cyan">#18FFFF</color>                 <!-- Cyan (frescura) -->
+    <color name="verde_menta">#69F0AE</color>          <!-- Verde menta (vida) -->
+    <color name="accent">#FF6090</color>               <!-- Accent (igual a secondary) -->
+
+    <!-- Utilidades -->
+    <color name="divider">#E0E0E0</color>              <!-- Líneas divisorias -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="error">#B00020</color>                <!-- Color de error -->
+
+    <!-- Compatibilidad Material Design 2 (deprecados pero necesarios) -->
+    <color name="purple_200">#E1BEE7</color>
+    <color name="purple_500">#7B1FA2</color>
+    <color name="purple_700">#4A148C</color>
+    <color name="teal_200">#18FFFF</color>
+    <color name="teal_700">#00BFA5</color>
+
+    <!-- Estados (para botones, selecciones, etc.) -->
+    <color name="state_pressed">#1F7B1FA2</color>     <!-- Violeta al 12% -->
+    <color name="state_focused">#1FFF6090</color>     <!-- Rosa al 12% -->
+    <color name="state_disabled">#61000000</color>    <!-- Negro al 38% -->
+
+    <!-- Gradientes (definidos como colores planos para XML) -->
+    <color name="gradient_start">#4A148C</color>      <!-- Índigo profundo -->
+    <color name="gradient_mid">#7B1FA2</color>        <!-- Violeta -->
+    <color name="gradient_end">#FF6090</color>        <!-- Rosa neón -->
+</resources>

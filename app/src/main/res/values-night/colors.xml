@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== PALETA AURELIA - DARK MODE ===== -->
+
+    <!-- Colores Primarios (ajustados para dark) -->
+    <color name="primary">#E1BEE7</color>              <!-- Violeta claro en dark -->
+    <color name="primary_dark">#9C27B0</color>         <!-- Violeta medio -->
+    <color name="primary_light">#7B1FA2</color>        <!-- Violeta oscuro invierte -->
+    <color name="on_primary">#000000</color>           <!-- Texto negro sobre violeta claro -->
+
+    <!-- Colores Secundarios -->
+    <color name="secondary">#FF6090</color>            <!-- Rosa mantiene -->
+    <color name="secondary_dark">#E84A7A</color>       <!-- Rosa oscuro -->
+    <color name="secondary_light">#FFD6E4</color>      <!-- Rosa pastel -->
+    <color name="on_secondary">#000000</color>         <!-- Texto negro sobre rosa -->
+
+    <!-- Colores Terciarios -->
+    <color name="tertiary">#FFD740</color>             <!-- Dorado mantiene -->
+    <color name="tertiary_dark">#FFC107</color>
+    <color name="tertiary_light">#FFF59D</color>
+    <color name="on_tertiary">#000000</color>
+
+    <!-- Colores de Superficie (DARK MODE) -->
+    <color name="background">#121212</color>           <!-- Negro suave -->
+    <color name="surface">#1E1E1E</color>              <!-- Gris muy oscuro -->
+    <color name="surface_variant">#2D2D2D</color>      <!-- Gris oscuro -->
+    <color name="on_background">#E1E1E1</color>        <!-- Texto claro -->
+    <color name="on_surface">#E1E1E1</color>           <!-- Texto claro -->
+
+    <!-- Colores de Texto (invertidos para dark) -->
+    <color name="text_primary">#E1E1E1</color>         <!-- Blanco suave -->
+    <color name="text_secondary">#B0B0B0</color>       <!-- Gris claro -->
+    <color name="text_tertiary">#757575</color>        <!-- Gris medio -->
+
+    <!-- Colores Adicionales del Ecosistema -->
+    <color name="coral">#FF9E80</color>
+    <color name="cyan">#18FFFF</color>
+    <color name="verde_menta">#69F0AE</color>
+    <color name="accent">#FF6090</color>               <!-- IMPORTANTE -->
+
+    <!-- Utilidades -->
+    <color name="divider">#3D3D3D</color>              <!-- Divisor oscuro -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="error">#CF6679</color>                <!-- Error para dark -->
+
+    <!-- Compatibilidad Material Design -->
+    <color name="purple_200">#E1BEE7</color>
+    <color name="purple_500">#9C27B0</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="teal_200">#18FFFF</color>
+    <color name="teal_700">#00BFA5</color>
+
+    <!-- Estados -->
+    <color name="state_pressed">#1FE1BEE7</color>
+    <color name="state_focused">#1FFF6090</color>
+    <color name="state_disabled">#61FFFFFF</color>
+
+    <!-- Gradientes (colores planos) -->
+    <color name="gradient_start">#7B1FA2</color>
+    <color name="gradient_mid">#9C27B0</color>
+    <color name="gradient_end">#FF6090</color>
+</resources>

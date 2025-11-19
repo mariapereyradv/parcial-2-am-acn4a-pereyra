@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white">
+
+    <!-- LOGO GRANDE -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- "L" con fondo violeta claro -->
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:text="L"
+            android:textColor="@color/primary"
+            android:textSize="96sp"
+            android:textStyle="bold"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:background="@color/primary_light"/>
+
+        <!-- "eído" en violeta -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="eído"
+            android:textColor="@color/primary"
+            android:textSize="72sp"
+            android:fontFamily="serif"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+    <!-- SUBTÍTULO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tu diario literario personal"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="8dp"/>
+
+    <!-- TAGLINE -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sin redes · Sin presión"
+        android:textColor="@color/secondary"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
