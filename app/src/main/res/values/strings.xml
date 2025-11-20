@@ -87,4 +87,31 @@
     <string name="cd_book_cover">Portada del libro</string>
     <string name="cd_edit_book">Editar libro</string>
     <string name="cd_delete_book">Eliminar libro</string>
+
+    <!-- ===== VALIDACIONES ===== -->
+    <string name="validation_empty_fields">Por favor completa todos los campos</string>
+    <string name="validation_titulo_required">El título es obligatorio</string>
+    <string name="validation_email_invalid">Email inválido</string>
+    <string name="validation_password_short">La contraseña debe tener al menos 4 caracteres</string>
+    <string name="validation_passwords_mismatch">Las contraseñas no coinciden</string>
+    <string name="validation_accept_privacy">Debes aceptar las políticas de privacidad</string>
+    <string name="validation_credentials_error">Credenciales incorrectas\nUsuario demo: demo / 1234</string>
+
+    <!-- ===== PLACEHOLDERS ===== -->
+    <string name="placeholder_email">tu@email.com</string>
+    <string name="placeholder_password">••••••</string>
+    <string name="placeholder_titulo">El nombre del libro</string>
+    <string name="placeholder_autor">Quién lo escribió</string>
+    <string name="placeholder_editorial">Editorial (opcional)</string>
+    <string name="placeholder_isbn">Código ISBN (opcional)</string>
+    <string name="placeholder_comentario">Tus pensamientos privados sobre este libro...</string>
+    <string name="placeholder_nombre">Tu nombre</string>
+    <string name="placeholder_password_min">Mínimo 4 caracteres</string>
+    <string name="placeholder_password_confirm">Reingresa tu contraseña</string>
+
+    <!-- ===== OTROS ===== -->
+    <string name="autor_desconocido">Autor desconocido</string>
+    <string name="detalle_prefix">Detalle: </string>
+    <string name="registro_exitoso">¡Registro exitoso!</string>
+    <string name="libro_eliminado_deseados">Libro eliminado de Deseados</string>
 </resources>

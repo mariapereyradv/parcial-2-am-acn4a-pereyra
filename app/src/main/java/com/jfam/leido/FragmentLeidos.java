@@ -51,7 +51,8 @@ public class FragmentLeidos extends Fragment {
             @Override
             public void alClickear(Libro libro) {
                 // TODO: Abrir detalle del libro (segunda entrega)
-                Toast.makeText(requireContext(), "Detalle: " + libro.getTitulo(),
+                Toast.makeText(requireContext(),
+                        getString(R.string.detalle_prefix) + libro.getTitulo(),
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -59,19 +60,20 @@ public class FragmentLeidos extends Fragment {
     }
 
     /**
+     /**
      * Muestra diálogo de confirmación para eliminar
      */
     private void mostrarDialogoEliminar(Libro libro) {
         new AlertDialog.Builder(requireContext())
-                .setTitle("Eliminar")
-                .setMessage("¿Eliminar \"" + libro.getTitulo() + "\" de Leídos?")
-                .setPositiveButton("Eliminar", (dialog, which) -> {
+                .setTitle(getString(R.string.dialog_eliminar_title))
+                .setMessage(getString(R.string.dialog_eliminar_message, libro.getTitulo()))
+                .setPositiveButton(getString(R.string.dialog_eliminar_confirm), (dialog, which) -> {
                     repositorio.eliminarLibro(libro);
                     refrescarLista();
-                    Toast.makeText(requireContext(), "Libro eliminado",
+                    Toast.makeText(requireContext(), getString(R.string.msg_libro_eliminado),
                             Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton(getString(R.string.dialog_cancelar), null)
                 .show();
     }
 

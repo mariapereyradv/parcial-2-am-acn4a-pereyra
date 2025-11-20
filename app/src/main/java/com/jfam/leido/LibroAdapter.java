@@ -81,7 +81,10 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
          */
         public void vincular(Libro libro, OnLibroListener listener) {
             txtTitulo.setText(libro.getTitulo());
-            txtAutor.setText(libro.getAutor().isEmpty() ? "Autor desconocido" : libro.getAutor());
+            String autorTexto = libro.getAutor().isEmpty() ?
+                    itemView.getContext().getString(R.string.autor_desconocido) :
+                    libro.getAutor();
+            txtAutor.setText(autorTexto);
 
             // Click normal: ver detalle (segunda entrega)
             itemView.setOnClickListener(v -> {

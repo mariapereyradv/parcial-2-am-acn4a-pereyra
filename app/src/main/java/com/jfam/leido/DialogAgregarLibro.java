@@ -89,7 +89,7 @@ public class DialogAgregarLibro extends DialogFragment {
 
         // Validación: título es obligatorio
         if (titulo.isEmpty()) {
-            etTitulo.setError("El título es obligatorio");
+            etTitulo.setError(getString(R.string.validation_titulo_required));
             etTitulo.requestFocus();
             return;
         }
@@ -108,7 +108,9 @@ public class DialogAgregarLibro extends DialogFragment {
             ((MainActivity) getActivity()).refrescarFragmentoActual();
         }
 
-        String mensaje = esLeido ? "Libro agregado a Leídos" : "Libro agregado a Deseados";
+        String mensaje = esLeido ?
+                getString(R.string.msg_libro_agregado_leidos) :
+                getString(R.string.msg_libro_agregado_deseados);
         Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show();
 
         dismiss();

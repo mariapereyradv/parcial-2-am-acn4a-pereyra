@@ -74,31 +74,31 @@ public class RegistroActivity extends AppCompatActivity {
         // Validaciones
         if (nombreUsuario.isEmpty() || email.isEmpty() ||
                 contrasena.isEmpty() || confirmarContrasena.isEmpty()) {
-            Toast.makeText(this, "Por favor completa todos los campos",
+            Toast.makeText(this, getString(R.string.validation_empty_fields),
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError("Email inválido");
+            etEmail.setError(getString(R.string.validation_email_invalid));
             etEmail.requestFocus();
             return;
         }
 
         if (contrasena.length() < 4) {
-            etContrasena.setError("La contraseña debe tener al menos 4 caracteres");
+            etContrasena.setError(getString(R.string.validation_password_short));
             etContrasena.requestFocus();
             return;
         }
 
         if (!contrasena.equals(confirmarContrasena)) {
-            etConfirmarContrasena.setError("Las contraseñas no coinciden");
+            etConfirmarContrasena.setError(getString(R.string.validation_passwords_mismatch));
             etConfirmarContrasena.requestFocus();
             return;
         }
 
         if (!checkPoliticas.isChecked()) {
-            Toast.makeText(this, "Debes aceptar las políticas de privacidad",
+            Toast.makeText(this, getString(R.string.validation_accept_privacy),
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -110,7 +110,7 @@ public class RegistroActivity extends AppCompatActivity {
                 .putString("email_usuario", email)
                 .apply();
 
-        Toast.makeText(this, "¡Registro exitoso!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.registro_exitoso), Toast.LENGTH_SHORT).show();
 
         // Ir al login
         Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);

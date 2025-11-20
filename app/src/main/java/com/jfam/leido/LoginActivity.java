@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         String contrasena = etContrasena.getText().toString();
 
         if (email.isEmpty() || contrasena.isEmpty()) {
-            Toast.makeText(this, "Por favor completa todos los campos",
+            Toast.makeText(this, getString(R.string.validation_empty_fields),
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         } else {
             // Login fallido
-            Toast.makeText(this, "Credenciales incorrectas\nUsuario demo: demo / 1234",
+            Toast.makeText(this, getString(R.string.validation_credentials_error),
                     Toast.LENGTH_LONG).show();
         }
     }

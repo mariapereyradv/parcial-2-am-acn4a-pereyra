@@ -1,57 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
-    ARCHIVO: dimens.xml
-    PROPÓSITO: Centralizar todas las dimensiones de la app
-    USO: En lugar de poner "16dp" hardcoded, usamos @dimen/spacing_md
-    BENEFICIO: Si queremos cambiar el espaciado, lo hacemos en un solo lugar
-    -->
+    <!-- ===== ESPACIADOS (MARGINS) ===== -->
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="margin_mini">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_xlarge">32dp</dimen>
+    <dimen name="margin_xxlarge">40dp</dimen>
+    <dimen name="margin_splash_top">60dp</dimen>
 
-    <!-- ==================== ESPACIADOS ==================== -->
-    <!-- Usamos estos para márgenes y paddings -->
+    <!-- ===== PADDING ===== -->
+    <dimen name="padding_tiny">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">12dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
 
-    <dimen name="spacing_xs">4dp</dimen>      <!-- Extra small: espacios muy pequeños -->
-    <dimen name="spacing_sm">8dp</dimen>      <!-- Small: espacios pequeños -->
-    <dimen name="spacing_md">16dp</dimen>     <!-- Medium: espaciado estándar -->
-    <dimen name="spacing_lg">24dp</dimen>     <!-- Large: espacios grandes -->
-    <dimen name="spacing_xl">32dp</dimen>     <!-- Extra Large: muy espaciados -->
-    <dimen name="spacing_xxl">48dp</dimen>    <!-- XXL: espacios enormes -->
-    <dimen name="spacing_xxxl">60dp</dimen>   <!-- XXXL: máximo espaciado -->
+    <!-- ===== TAMAÑOS DE TEXTO ===== -->
+    <dimen name="text_micro">11sp</dimen>
+    <dimen name="text_tiny">12sp</dimen>
+    <dimen name="text_caption">13sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_subtitle">16sp</dimen>
+    <dimen name="text_title">18sp</dimen>
+    <dimen name="text_headline_small">24sp</dimen>
+    <dimen name="text_headline_medium">40sp</dimen>
+    <dimen name="text_headline_large">48sp</dimen>
+    <dimen name="text_display_small">72sp</dimen>
+    <dimen name="text_display_large">96sp</dimen>
 
-    <!-- ==================== TAMAÑOS DE TEXTO ==================== -->
-    <!-- sp = Scale-independent Pixels (se ajusta según configuración del usuario) -->
+    <!-- ===== ALTURAS DE COMPONENTES ===== -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="button_height_large">60dp</dimen>
+    <dimen name="input_height">56dp</dimen>
+    <dimen name="header_height">80dp</dimen>
+    <dimen name="tab_height">48dp</dimen>
 
-    <dimen name="text_xs">11sp</dimen>        <!-- Textos muy pequeños (como el "usuario demo") -->
-    <dimen name="text_sm">12sp</dimen>        <!-- Textos pequeños (subtítulos) -->
-    <dimen name="text_md">14sp</dimen>        <!-- Texto normal (cuerpo) -->
-    <dimen name="text_lg">16sp</dimen>        <!-- Texto grande (inputs, botones) -->
-    <dimen name="text_xl">18sp</dimen>        <!-- Extra grande -->
-    <dimen name="text_xxl">24sp</dimen>       <!-- Títulos -->
-    <dimen name="text_logo">48sp</dimen>      <!-- Logo grande -->
+    <!-- ===== RADIOS DE BORDES ===== -->
+    <dimen name="corner_radius_small">8dp</dimen>
+    <dimen name="corner_radius_medium">12dp</dimen>
+    <dimen name="corner_radius_large">16dp</dimen>
+    <dimen name="corner_radius_button">24dp</dimen>
 
-    <!-- ==================== COMPONENTES ==================== -->
+    <!-- ===== ELEVACIONES ===== -->
+    <dimen name="elevation_low">2dp</dimen>
+    <dimen name="elevation_medium">4dp</dimen>
+    <dimen name="elevation_high">6dp</dimen>
+    <dimen name="elevation_fab_normal">6dp</dimen>
+    <dimen name="elevation_fab_pressed">12dp</dimen>
 
-    <!-- CARDS (las tarjetas de los libros) -->
-    <dimen name="card_corner_radius">16dp</dimen>  <!-- Qué tan redondeadas son las esquinas -->
-    <dimen name="card_elevation">2dp</dimen>       <!-- Qué tan elevada está la sombra -->
-    <dimen name="card_margin">8dp</dimen>          <!-- Espacio entre cards -->
+    <!-- ===== TAMAÑOS DE ICONOS ===== -->
+    <dimen name="icon_small">18dp</dimen>
+    <dimen name="icon_medium">24dp</dimen>
+    <dimen name="icon_large">28dp</dimen>
+    <dimen name="icon_action">40dp</dimen>
+    <dimen name="icon_perfil">44dp</dimen>
 
-    <!-- BOTONES -->
-    <dimen name="button_height">56dp</dimen>           <!-- Alto estándar de botones -->
-    <dimen name="button_corner_radius">24dp</dimen>    <!-- Bordes redondeados -->
-    <dimen name="button_elevation">4dp</dimen>         <!-- Sombra del botón -->
+    <!-- ===== PORTADA DE LIBRO ===== -->
+    <dimen name="book_cover_width">56dp</dimen>
+    <dimen name="book_cover_height">84dp</dimen>
+    <dimen name="book_logo_width">60dp</dimen>
+    <dimen name="book_logo_height">80dp</dimen>
+    <dimen name="book_logo_width_large">120dp</dimen>
+    <dimen name="book_logo_height_large">160dp</dimen>
 
-    <!-- INPUTS (EditText) -->
-    <dimen name="input_height">56dp</dimen>            <!-- Alto de campos de texto -->
-    <dimen name="input_corner_radius">12dp</dimen>     <!-- Bordes redondeados -->
+    <!-- ===== CARD ===== -->
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
 
-    <!-- ÍCONOS -->
-    <dimen name="icon_sm">24dp</dimen>     <!-- Íconos pequeños -->
-    <dimen name="icon_md">40dp</dimen>     <!-- Íconos medianos -->
-    <dimen name="icon_lg">44dp</dimen>     <!-- Íconos grandes (perfil) -->
-
-    <!-- PORTADAS DE LIBROS -->
-    <dimen name="book_cover_width">56dp</dimen>    <!-- Ancho de la miniatura -->
-    <dimen name="book_cover_height">84dp</dimen>   <!-- Alto de la miniatura (proporción libro) -->
-
+    <!-- ===== COMENTARIO FIELD ===== -->
+    <dimen name="comentario_height">140dp</dimen>
 </resources>

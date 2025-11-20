@@ -51,7 +51,8 @@ public class FragmentDeseados extends Fragment {
             @Override
             public void alClickear(Libro libro) {
                 // TODO: Abrir detalle del libro (segunda entrega)
-                Toast.makeText(requireContext(), "Detalle: " + libro.getTitulo(),
+                Toast.makeText(requireContext(),
+                        getString(R.string.detalle_prefix) + libro.getTitulo(),
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -62,7 +63,11 @@ public class FragmentDeseados extends Fragment {
      * Muestra diálogo con opciones: Marcar como leído / Eliminar
      */
     private void mostrarDialogoOpciones(Libro libro) {
-        String[] opciones = {"Marcar como leído", "Eliminar", "Cancelar"};
+        String[] opciones = {
+                getString(R.string.dialog_opciones_marcar),
+                getString(R.string.dialog_opciones_eliminar),
+                getString(R.string.dialog_cancelar)
+        };
 
         new AlertDialog.Builder(requireContext())
                 .setTitle(libro.getTitulo())
@@ -73,14 +78,14 @@ public class FragmentDeseados extends Fragment {
                             refrescarLista();
                             refrescarFragmentoLeidos();
                             Toast.makeText(requireContext(),
-                                    "\"" + libro.getTitulo() + "\" marcado como leído",
+                                    getString(R.string.msg_marcado_leido, libro.getTitulo()),
                                     Toast.LENGTH_SHORT).show();
                             break;
                         case 1: // Eliminar
                             repositorio.eliminarLibro(libro);
                             refrescarLista();
                             Toast.makeText(requireContext(),
-                                    "Libro eliminado de Deseados",
+                                    getString(R.string.libro_eliminado_deseados),
                                     Toast.LENGTH_SHORT).show();
                             break;
                         case 2: // Cancelar
