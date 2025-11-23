@@ -88,8 +88,22 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                     libro.getAutor();
             txtAutor.setText(autorTexto);
 
-            // CARGAR IMAGEN CON GLIDE
-            if (libro.getUrlPortada() != null && !libro.getUrlPortada().isEmpty()) {
+            // CARGAR IMAGEN: prioridad Base64, luego URL
+            if (libro.getImagenBase64() != null && !libro.getImagenBase64().isEmpty()) {
+                // Cargar desde Base64
+                try {
+                    byte[] decodedString = android.util.Base64.decode(
+                            libro.getImagenBase64(), android.util.Base64.DEFAULT);
+                    android.graphics.Bitmap bitmap = android.graphics.BitmapFactory
+                            .decodeByteArray(decodedString, 0, decodedString.length);
+                    imgPortada.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    imgPortada.setImageResource(android.R.color.transparent);
+                    imgPortada.setBackgroundColor(itemView.getContext()
+                            .getResources().getColor(R.color.primary_light));
+                }
+            } else if (libro.getUrlPortada() != null && !libro.getUrlPortada().isEmpty()) {
+                // Cargar desde URL con Glide
                 Glide.with(itemView.getContext())
                         .load(libro.getUrlPortada())
                         .placeholder(R.color.primary_light)
@@ -97,20 +111,19 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                         .centerCrop()
                         .into(imgPortada);
             } else {
-                // Si no hay URL, usar color de fondo
+                // Sin portada
                 imgPortada.setImageResource(android.R.color.transparent);
                 imgPortada.setBackgroundColor(itemView.getContext()
                         .getResources().getColor(R.color.primary_light));
             }
 
-            // Click normal: ver detalle (segunda entrega)
+            // Resto del código igual...
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alClickear(libro);
                 }
             });
 
-            // Long press: mostrar opciones
             itemView.setOnLongClickListener(v -> {
                 if (listener != null) {
                     listener.alMantenerPresionado(libro);
@@ -118,17 +131,13 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                 return true;
             });
 
-            // Botón editar (segunda entrega)
             btnEditar.setOnClickListener(v -> {
-                // TODO
+                // TODO: Implementar edición
             });
 
-            // Botón eliminar
             btnEliminar.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alMantenerPresionado(libro);
                 }
             });
         }
-    }
-}

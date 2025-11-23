@@ -130,16 +130,70 @@
             android:background="@drawable/edit_text_background"
             android:layout_marginBottom="@dimen/margin_medium"/>
 
-        <!-- URL PORTADA -->
+        <!-- PORTADA DEL LIBRO -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="URL DE PORTADA"
+            android:text="PORTADA"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_body"
             android:textStyle="bold"
             android:layout_marginBottom="@dimen/margin_small"/>
 
+        <!-- Vista previa de la imagen -->
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/margin_medium">
+
+            <ImageView
+                android:id="@+id/imgVistaPrevia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/primary_light"
+                android:scaleType="centerCrop"
+                android:contentDescription="Vista previa portada"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_background"/>
+        </FrameLayout>
+
+        <!-- Botones para elegir método -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/margin_medium">
+
+            <Button
+                android:id="@+id/btnSeleccionarImagen"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="📁 GALERÍA"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:background="@drawable/button_secondary"
+                android:layout_marginEnd="4dp"/>
+
+            <Button
+                android:id="@+id/btnUsarUrl"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="🌐 URL"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:background="@drawable/button_secondary"
+                android:layout_marginStart="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Campo URL (oculto inicialmente) -->
         <EditText
             android:id="@+id/etUrlPortada"
             android:layout_width="match_parent"
@@ -147,11 +201,12 @@
             android:hint="https://ejemplo.com/portada.jpg"
             android:inputType="textUri"
             android:padding="@dimen/padding_normal"
-            android:textSize="@dimen/text_subtitle"
+            android:textSize="14sp"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary"
             android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="@dimen/margin_medium"/>
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:visibility="gone"/>
 
         <!-- COMENTARIO / NOTAS -->
         <TextView

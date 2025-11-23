@@ -15,6 +15,7 @@ public class Libro implements Serializable {
     private String comentario;
     private boolean esLeido;
     private String urlPortada;
+    private String imagenBase64;
 
     public Libro(String titulo, String autor, String editorial, String isbn, String comentario, boolean esLeido) {
         this.id = UUID.randomUUID().toString();
@@ -25,6 +26,7 @@ public class Libro implements Serializable {
         this.comentario = comentario != null ? comentario : "";
         this.esLeido = esLeido;
         this.urlPortada = "";
+        this.imagenBase64 = "";
     }
 
     // Getters
@@ -36,12 +38,19 @@ public class Libro implements Serializable {
     public String getComentario() { return comentario; }
     public boolean esLeido() { return esLeido; }
     public String getUrlPortada() { return urlPortada; }
-
-    // Setter para cambiar estado
+    public void setEsLeido(boolean esLeido) { this.esLeido = esLeido; }
     public void setUrlPortada(String urlPortada) {
         this.urlPortada = urlPortada != null ? urlPortada : "";
     }
+    public void setImagenBase64(String imagenBase64) {
+        this.imagenBase64 = imagenBase64 != null ? imagenBase64 : "";
+    }
+
+    // Setter
     public void setEsLeido(boolean esLeido) { this.esLeido = esLeido; }
+    public void setUrlPortada(String urlPortada) {
+        this.urlPortada = urlPortada != null ? urlPortada : "";
+    }
 
     /**
      * Representación para mostrar en la lista
