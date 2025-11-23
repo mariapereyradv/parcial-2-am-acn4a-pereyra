@@ -1,110 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background">
 
-    <!-- HEADER con gradiente y perfil -->
-    <RelativeLayout
+    <!-- CONTENIDO PRINCIPAL -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary_dark"
-        android:padding="16dp"
-        android:elevation="4dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Logo y texto -->
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <!-- HEADER con gradiente y perfil -->
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true">
+            android:background="@color/primary_dark"
+            android:padding="@dimen/padding_normal"
+            android:elevation="@dimen/elevation_medium">
 
-            <TextView
-                android:id="@+id/txtLeido"
+            <!-- Logo y texto -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leído"
-                android:textColor="@color/tertiary"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:fontFamily="serif"/>
+                android:orientation="vertical"
+                android:layout_centerVertical="true">
 
+                <TextView
+                    android:id="@+id/txtLeido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_title"
+                    android:textColor="@color/tertiary"
+                    android:textSize="@dimen/text_headline_small"
+                    android:textStyle="bold"
+                    android:fontFamily="serif"/>
+
+                <TextView
+                    android:id="@+id/txtSubtitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_subtitle"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_micro"
+                    android:layout_marginTop="@dimen/margin_tiny"
+                    android:alpha="0.9"/>
+            </LinearLayout>
+
+            <!-- Ícono de perfil -->
             <TextView
-                android:id="@+id/txtSubtitulo"
+                android:id="@+id/imgPerfil"
+                android:layout_width="@dimen/icon_perfil"
+                android:layout_height="@dimen/icon_perfil"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="👤"
+                android:textSize="@dimen/icon_medium"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_profile"/>
+
+        </RelativeLayout>
+
+        <!-- TABS -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/surface"
+            android:elevation="@dimen/elevation_low"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/secondary"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@color/secondary"
+            app:tabTextColor="@color/text_secondary"
+            app:tabTextAppearance="@style/TextAppearance.Leido.Body">
+
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tu diario literario"
-                android:textColor="@color/white"
-                android:textSize="11sp"
-                android:layout_marginTop="2dp"
-                android:alpha="0.9"/>
-        </LinearLayout>
+                android:text="@string/tab_leidos"/>
 
-        <!-- Ícono de perfil -->
-        <TextView
-            android:id="@+id/imgPerfil"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="👤"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Perfil"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_deseados"/>
 
-    </RelativeLayout>
+        </com.google.android.material.tabs.TabLayout>
 
-    <!-- TABS -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/surface"
-        android:elevation="2dp"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/secondary"
-        app:tabIndicatorHeight="3dp"
-        app:tabSelectedTextColor="@color/secondary"
-        app:tabTextColor="@color/text_secondary"
-        app:tabTextAppearance="@style/TextAppearance.Leido.Body">
+        <!-- CONTENEDOR DE FRAGMENTOS -->
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/background"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📖 Leídos"/>
+    </LinearLayout>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="⭐ Deseados"/>
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <!-- CONTENEDOR DE FRAGMENTOS -->
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/background"/>
-
-    <!-- BOTÓN FLOTANTE con color Aurelia -->
+    <!-- BOTÓN FLOTANTE (fuera del LinearLayout para que flote) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_medium"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/secondary"
         app:tint="@color/white"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
+        app:elevation="@dimen/elevation_fab_normal"
+        app:pressedTranslationZ="@dimen/elevation_fab_pressed"
         app:borderWidth="0dp"
-        android:contentDescription="Agregar libro"/>
+        android:contentDescription="@string/cd_add_book"/>
 
-</LinearLayout>
+</RelativeLayout>

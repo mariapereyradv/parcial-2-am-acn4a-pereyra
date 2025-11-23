@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
+    android:layout_margin="@dimen/card_margin"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
     app:cardBackgroundColor="@color/surface"
     android:foreground="?attr/selectableItemBackground">
 
@@ -13,22 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="@dimen/padding_normal">
 
-        <!-- PORTADA con borde suave violeta -->
+        <!-- PORTADA con imagen real -->
         <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="84dp">
+            android:layout_width="@dimen/book_cover_width"
+            android:layout_height="@dimen/book_cover_height">
 
-            <TextView
+            <ImageView
                 android:id="@+id/imgPortada"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/primary_light"
-                android:text="📚"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:contentDescription="Portada del libro"/>
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/cd_book_cover"/>
 
             <!-- Borde decorativo -->
             <View
@@ -43,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/margin_medium"
             android:layout_gravity="center_vertical">
 
             <TextView
@@ -52,20 +50,20 @@
                 android:layout_height="wrap_content"
                 android:text="Título del libro"
                 android:textColor="@color/text_primary"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_subtitle"
                 android:textStyle="bold"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:lineSpacingExtra="2dp"/>
+                android:lineSpacingExtra="@dimen/margin_tiny"/>
 
             <TextView
                 android:id="@+id/txtAutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Autor"
+                android:text="@string/autor_desconocido"
                 android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp"
+                android:textSize="@dimen/text_body"
+                android:layout_marginTop="@dimen/margin_mini"
                 android:maxLines="1"
                 android:ellipsize="end"/>
 
@@ -80,25 +78,25 @@
 
             <TextView
                 android:id="@+id/btnEditar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/icon_action"
+                android:layout_height="@dimen/icon_action"
                 android:text="✏️"
-                android:textSize="18sp"
+                android:textSize="@dimen/icon_small"
                 android:gravity="center"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Editar"
+                android:contentDescription="@string/cd_edit_book"
                 android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/btnEliminar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/icon_action"
+                android:layout_height="@dimen/icon_action"
                 android:text="🗑️"
-                android:textSize="18sp"
+                android:textSize="@dimen/icon_small"
                 android:gravity="center"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Eliminar"
-                android:layout_marginStart="4dp"/>
+                android:contentDescription="@string/cd_delete_book"
+                android:layout_marginStart="@dimen/margin_mini"/>
 
         </LinearLayout>
 

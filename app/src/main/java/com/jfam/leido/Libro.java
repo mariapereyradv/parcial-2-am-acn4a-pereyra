@@ -14,6 +14,7 @@ public class Libro implements Serializable {
     private String isbn;
     private String comentario;
     private boolean esLeido;
+    private String urlPortada;
 
     public Libro(String titulo, String autor, String editorial, String isbn, String comentario, boolean esLeido) {
         this.id = UUID.randomUUID().toString();
@@ -23,6 +24,7 @@ public class Libro implements Serializable {
         this.isbn = isbn != null ? isbn : "";
         this.comentario = comentario != null ? comentario : "";
         this.esLeido = esLeido;
+        this.urlPortada = "";
     }
 
     // Getters
@@ -33,8 +35,12 @@ public class Libro implements Serializable {
     public String getIsbn() { return isbn; }
     public String getComentario() { return comentario; }
     public boolean esLeido() { return esLeido; }
+    public String getUrlPortada() { return urlPortada; }
 
     // Setter para cambiar estado
+    public void setUrlPortada(String urlPortada) {
+        this.urlPortada = urlPortada != null ? urlPortada : "";
+    }
     public void setEsLeido(boolean esLeido) { this.esLeido = esLeido; }
 
     /**

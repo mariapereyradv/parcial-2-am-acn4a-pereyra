@@ -63,17 +63,29 @@ public class LibroRepository {
      * Agrega libros de ejemplo para pruebas
      */
     private void agregarLibrosEjemplo() {
-        libros.add(new Libro("Cien años de soledad", "Gabriel García Márquez",
+        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez",
                 "Sudamericana", "978-0-307-47472-8",
-                "Obra maestra del realismo mágico", true));
-        libros.add(new Libro("El nombre de la rosa", "Umberto Eco",
+                "Obra maestra del realismo mágico", true);
+        libro1.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/91TvVQS7loL.jpg");
+        libros.add(libro1);
+
+        Libro libro2 = new Libro("El nombre de la rosa", "Umberto Eco",
                 "Sudamericana", "978-0-15-601219-2",
-                "Misterio medieval fascinante", true));
-        libros.add(new Libro("Rayuela", "Julio Cortázar",
+                "Misterio medieval fascinante", true);
+        libro2.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/91V0dL8PHJL.jpg");
+        libros.add(libro2);
+
+        Libro libro3 = new Libro("Rayuela", "Julio Cortázar",
                 "Sudamericana", "978-0-307-47423-0",
-                "Quiero leerlo pronto", false));
-        libros.add(new Libro("Ficciones", "Jorge Luis Borges",
-                "Emecé", "978-0-8021-3545-0", "", false));
+                "Quiero leerlo pronto", false);
+        libro3.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/81k+I7RddBL.jpg");
+        libros.add(libro3);
+
+        Libro libro4 = new Libro("Ficciones", "Jorge Luis Borges",
+                "Emecé", "978-0-8021-3545-0", "", false);
+        libro4.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/81fHK8sV6CL.jpg");
+        libros.add(libro4);
+
         guardarLibros();
     }
 

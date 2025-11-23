@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="@dimen/padding_large">
 
         <!-- HEADER -->
         <LinearLayout
@@ -17,23 +17,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="@dimen/margin_large">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Agregar Libro"
+                android:text="@string/add_book_title"
                 android:textColor="@color/primary"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_headline_small"
                 android:textStyle="bold"
                 android:fontFamily="serif"/>
 
             <TextView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/icon_action"
+                android:layout_height="@dimen/icon_action"
                 android:text="📚"
-                android:textSize="28sp"
+                android:textSize="@dimen/icon_large"
                 android:gravity="center"/>
 
         </LinearLayout>
@@ -42,126 +42,149 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TÍTULO *"
+            android:text="@string/add_book_titulo"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/margin_small"/>
 
         <EditText
             android:id="@+id/etTitulo"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:hint="El nombre del libro"
+            android:layout_height="@dimen/input_height"
+            android:hint="@string/placeholder_titulo"
             android:inputType="textCapSentences"
-            android:padding="16dp"
-            android:textSize="16sp"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/text_subtitle"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary"
             android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/margin_medium"/>
 
         <!-- AUTOR -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AUTOR"
+            android:text="@string/add_book_autor"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/margin_small"/>
 
         <EditText
             android:id="@+id/etAutor"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:hint="Quién lo escribió"
+            android:layout_height="@dimen/input_height"
+            android:hint="@string/placeholder_autor"
             android:inputType="textCapWords"
-            android:padding="16dp"
-            android:textSize="16sp"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/text_subtitle"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary"
             android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/margin_medium"/>
 
         <!-- EDITORIAL -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EDITORIAL"
+            android:text="@string/add_book_editorial"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/margin_small"/>
 
         <EditText
             android:id="@+id/etEditorial"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:hint="Editorial (opcional)"
+            android:layout_height="@dimen/input_height"
+            android:hint="@string/placeholder_editorial"
             android:inputType="textCapWords"
-            android:padding="16dp"
-            android:textSize="16sp"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/text_subtitle"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary"
             android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/margin_medium"/>
 
         <!-- ISBN -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ISBN"
+            android:text="@string/add_book_isbn"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/margin_small"/>
 
         <EditText
             android:id="@+id/etIsbn"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:hint="Código ISBN (opcional)"
+            android:layout_height="@dimen/input_height"
+            android:hint="@string/placeholder_isbn"
             android:inputType="text"
-            android:padding="16dp"
-            android:textSize="16sp"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/text_subtitle"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary"
             android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="@dimen/margin_medium"/>
+
+        <!-- URL PORTADA -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="URL DE PORTADA"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_body"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/margin_small"/>
+
+        <EditText
+            android:id="@+id/etUrlPortada"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:hint="https://ejemplo.com/portada.jpg"
+            android:inputType="textUri"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/text_subtitle"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="@dimen/margin_medium"/>
 
         <!-- COMENTARIO / NOTAS -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TUS NOTAS"
+            android:text="@string/add_book_notas"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/margin_small"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lo que sentiste, lo que te quedó, por qué te gustó (o no)"
+            android:text="@string/add_book_notas_hint"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
-            android:layout_marginBottom="8dp"
+            android:textSize="@dimen/text_tiny"
+            android:layout_marginBottom="@dimen/margin_small"
             android:alpha="0.8"/>
 
         <EditText
             android:id="@+id/etComentario"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:hint="Tus pensamientos privados sobre este libro..."
+            android:layout_height="@dimen/comentario_height"
+            android:hint="@string/placeholder_comentario"
             android:inputType="textMultiLine|textCapSentences"
             android:gravity="top|start"
-            android:padding="16dp"
-            android:textSize="16sp"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/text_subtitle"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary"
             android:background="@drawable/edit_text_background"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="@dimen/margin_xlarge"/>
 
         <!-- NOTA PRIVACIDAD -->
         <LinearLayout
@@ -169,25 +192,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="12dp"
+            android:padding="@dimen/padding_medium"
             android:background="@color/primary_light"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="@dimen/margin_large">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🔒"
-                android:textSize="20sp"
-                android:layout_marginEnd="12dp"/>
+                android:textSize="@dimen/icon_medium"
+                android:layout_marginEnd="@dimen/margin_medium"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tus notas son privadas. Nadie más las verá."
+                android:text="@string/add_book_privacy"
                 android:textColor="@color/primary_dark"
-                android:textSize="12sp"
-                android:lineSpacingExtra="2dp"/>
+                android:textSize="@dimen/text_tiny"
+                android:lineSpacingExtra="@dimen/margin_tiny"/>
 
         </LinearLayout>
 
@@ -201,28 +224,28 @@
             <Button
                 android:id="@+id/btnCancelar"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
-                android:text="CANCELAR"
+                android:text="@string/add_book_cancel"
                 android:textColor="@color/primary"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_subtitle"
                 android:textStyle="bold"
                 android:background="@drawable/button_secondary"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="@dimen/margin_small"/>
 
             <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
-                android:text="GUARDAR"
+                android:text="@string/add_book_save"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_subtitle"
                 android:textStyle="bold"
                 android:background="@drawable/button_primary"
-                android:elevation="4dp"
+                android:elevation="@dimen/elevation_medium"
                 android:stateListAnimator="@null"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="@dimen/margin_small"/>
 
         </LinearLayout>
 

@@ -12,15 +12,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="@dimen/margin_medium">
 
         <!-- "L" con fondo violeta claro -->
         <TextView
-            android:layout_width="120dp"
-            android:layout_height="160dp"
-            android:text="L"
+            android:layout_width="@dimen/book_logo_width_large"
+            android:layout_height="@dimen/book_logo_height_large"
+            android:text="@string/app_name_initial"
             android:textColor="@color/primary"
-            android:textSize="96sp"
+            android:textSize="@dimen/text_display_large"
             android:textStyle="bold"
             android:fontFamily="serif"
             android:gravity="center"
@@ -30,11 +30,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="eído"
+            android:text="@string/app_name_rest"
             android:textColor="@color/primary"
-            android:textSize="72sp"
+            android:textSize="@dimen/text_display_small"
             android:fontFamily="serif"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="@dimen/margin_small"/>
 
     </LinearLayout>
 
@@ -42,22 +42,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tu diario literario personal"
+        android:text="@string/app_subtitle"
         android:textColor="@color/text_primary"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_title"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="@dimen/margin_small"/>
 
     <!-- TAGLINE -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sin redes · Sin presión"
+        android:text="@string/app_tagline"
         android:textColor="@color/secondary"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_body"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="@dimen/margin_small"/>
 
 </LinearLayout>

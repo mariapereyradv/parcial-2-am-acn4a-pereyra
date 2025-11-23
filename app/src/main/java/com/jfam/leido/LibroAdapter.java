@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+import com.bumptech.glide.Glide;
+import android.widget.ImageView;
 
 /**
  * Adaptador para mostrar la lista de libros en RecyclerView
@@ -61,7 +63,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
      */
     static class LibroViewHolder extends RecyclerView.ViewHolder {
 
-        TextView imgPortada;
+        ImageView imgPortada;
         TextView txtTitulo;
         TextView txtAutor;
         TextView btnEditar;
@@ -86,6 +88,21 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                     libro.getAutor();
             txtAutor.setText(autorTexto);
 
+            // CARGAR IMAGEN CON GLIDE
+            if (libro.getUrlPortada() != null && !libro.getUrlPortada().isEmpty()) {
+                Glide.with(itemView.getContext())
+                        .load(libro.getUrlPortada())
+                        .placeholder(R.color.primary_light)
+                        .error(R.color.primary_light)
+                        .centerCrop()
+                        .into(imgPortada);
+            } else {
+                // Si no hay URL, usar color de fondo
+                imgPortada.setImageResource(android.R.color.transparent);
+                imgPortada.setBackgroundColor(itemView.getContext()
+                        .getResources().getColor(R.color.primary_light));
+            }
+
             // Click normal: ver detalle (segunda entrega)
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
@@ -103,7 +120,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
 
             // Botón editar (segunda entrega)
             btnEditar.setOnClickListener(v -> {
-                // TODO: Implementar edición en segunda entrega
+                // TODO
             });
 
             // Botón eliminar

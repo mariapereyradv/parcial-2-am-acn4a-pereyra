@@ -21,6 +21,7 @@ public class DialogAgregarLibro extends DialogFragment {
     private EditText etAutor;
     private EditText etEditorial;
     private EditText etIsbn;
+    private EditText etUrlPortada;
     private EditText etComentario;
     private Button btnGuardar;
     private Button btnCancelar;
@@ -68,6 +69,7 @@ public class DialogAgregarLibro extends DialogFragment {
         etAutor = vista.findViewById(R.id.etAutor);
         etEditorial = vista.findViewById(R.id.etEditorial);
         etIsbn = vista.findViewById(R.id.etIsbn);
+        etUrlPortada = vista.findViewById(R.id.etUrlPortada);
         etComentario = vista.findViewById(R.id.etComentario);
         btnGuardar = vista.findViewById(R.id.btnGuardar);
         btnCancelar = vista.findViewById(R.id.btnCancelar);
@@ -87,7 +89,6 @@ public class DialogAgregarLibro extends DialogFragment {
     private void guardarLibro() {
         String titulo = etTitulo.getText().toString().trim();
 
-        // Validación: título es obligatorio
         if (titulo.isEmpty()) {
             etTitulo.setError(getString(R.string.validation_titulo_required));
             etTitulo.requestFocus();
@@ -97,13 +98,15 @@ public class DialogAgregarLibro extends DialogFragment {
         String autor = etAutor.getText().toString().trim();
         String editorial = etEditorial.getText().toString().trim();
         String isbn = etIsbn.getText().toString().trim();
+        String urlPortada = etUrlPortada.getText().toString().trim();
         String comentario = etComentario.getText().toString().trim();
 
-        // Crear y guardar el libro
+        // Crear libro con URL
         Libro nuevoLibro = new Libro(titulo, autor, editorial, isbn, comentario, esLeido);
+        nuevoLibro.setUrlPortada(urlPortada);
+
         LibroRepository.obtenerInstancia(requireContext()).agregarLibro(nuevoLibro);
 
-        // Refrescar la vista principal
         if (getActivity() instanceof MainActivity) {
             ((MainActivity) getActivity()).refrescarFragmentoActual();
         }

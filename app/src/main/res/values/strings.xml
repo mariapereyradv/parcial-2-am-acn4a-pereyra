@@ -114,4 +114,7 @@
     <string name="detalle_prefix">Detalle: </string>
     <string name="registro_exitoso">¡Registro exitoso!</string>
     <string name="libro_eliminado_deseados">Libro eliminado de Deseados</string>
+
+    <string name="app_name_initial">L</string>
+    <string name="app_name_rest">eído</string>
 </resources>
