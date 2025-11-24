@@ -38,12 +38,13 @@
     <color name="verde_menta">#69F0AE</color>          <!-- Verde menta (vida) -->
     <color name="accent">#FF6090</color>               <!-- Accent (igual a secondary) -->
 
+
     <!-- Utilidades -->
     <color name="divider">#E0E0E0</color>              <!-- Líneas divisorias -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="black_overlay">#66000000</color>
-    <color name="error">#B00020</color>                <!-- Color de error -->
+    <color name="error">#CF6679</color>               <!-- Color de error -->
 
     <!-- Compatibilidad Material Design 2 (deprecados pero necesarios) -->
     <color name="purple_200">#E1BEE7</color>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutAurelia"
+    android:background="@color/primary_dark">
+
+    <!-- Contenedor central -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Círculo animado (representa planeta/aurora) -->
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="32dp">
+
+            <!-- Círculo exterior (gira) -->
+            <View
+                android:id="@+id/circuloExterior"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@drawable/circulo_aurelia_exterior"/>
+
+            <!-- Círculo medio -->
+            <View
+                android:id="@+id/circuloMedio"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circulo_aurelia_medio"/>
+
+            <!-- Círculo interior (pulsa) -->
+            <View
+                android:id="@+id/circuloInterior"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circulo_aurelia_interior"/>
+
+        </FrameLayout>
+
+        <!-- Texto AURELIA con fade-in -->
+        <TextView
+            android:id="@+id/txtAurelia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AURELIA"
+            android:textColor="@color/tertiary"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:fontFamily="serif"
+            android:letterSpacing="0.15"
+            android:alpha="0"/>
+
+        <!-- Subtítulo -->
+        <TextView
+            android:id="@+id/txtUniverso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="U N I V E R S O"
+            android:textColor="@color/secondary"
+            android:textSize="14sp"
+            android:letterSpacing="0.3"
+            android:layout_marginTop="8dp"
+            android:alpha="0"/>
+
+    </LinearLayout>
+
+    <!-- Estrellas animadas (opcional) -->
+    <ImageView
+        android:id="@+id/estrella1"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:background="@drawable/estrella"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:alpha="0"/>
+
+    <ImageView
+        android:id="@+id/estrella2"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:background="@drawable/estrella"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="150dp"
+        android:alpha="0"/>
+
+    <ImageView
+        android:id="@+id/estrella3"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:background="@drawable/estrella"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="200dp"
+        android:alpha="0"/>
+
+    <ImageView
+        android:id="@+id/estrella4"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:background="@drawable/estrella"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="250dp"
+        android:alpha="0"/>
+
+</RelativeLayout>

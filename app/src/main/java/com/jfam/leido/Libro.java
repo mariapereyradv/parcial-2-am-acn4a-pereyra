@@ -29,27 +29,62 @@ public class Libro implements Serializable {
         this.imagenBase64 = "";
     }
 
-    // Getters
-    public String getId() { return id; }
-    public String getTitulo() { return titulo; }
-    public String getAutor() { return autor; }
-    public String getEditorial() { return editorial; }
-    public String getIsbn() { return isbn; }
-    public String getComentario() { return comentario; }
-    public boolean esLeido() { return esLeido; }
-    public String getUrlPortada() { return urlPortada; }
-    public void setEsLeido(boolean esLeido) { this.esLeido = esLeido; }
+    // === GETTERS ===
+    public String getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public boolean esLeido() {
+        return esLeido;
+    }
+
+    public String getUrlPortada() {
+        return urlPortada != null ? urlPortada : "";
+    }
+
+    public String getImagenBase64() {
+        return imagenBase64 != null ? imagenBase64 : "";
+    }
+
+    // === SETTERS ===
+    public void setEsLeido(boolean esLeido) {
+        this.esLeido = esLeido;
+    }
+
     public void setUrlPortada(String urlPortada) {
         this.urlPortada = urlPortada != null ? urlPortada : "";
     }
+
     public void setImagenBase64(String imagenBase64) {
         this.imagenBase64 = imagenBase64 != null ? imagenBase64 : "";
     }
 
-    // Setter
-    public void setEsLeido(boolean esLeido) { this.esLeido = esLeido; }
-    public void setUrlPortada(String urlPortada) {
-        this.urlPortada = urlPortada != null ? urlPortada : "";
+    /**
+     * Verifica si el libro tiene alguna portada (URL o imagen local)
+     */
+    public boolean tienePortada() {
+        return (urlPortada != null && !urlPortada.isEmpty()) ||
+                (imagenBase64 != null && !imagenBase64.isEmpty());
     }
 
     /**

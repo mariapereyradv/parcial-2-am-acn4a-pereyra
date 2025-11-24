@@ -1,14 +1,18 @@
 package com.jfam.leido;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 import com.bumptech.glide.Glide;
-import android.widget.ImageView;
+import java.util.List;
 
 /**
  * Adaptador para mostrar la lista de libros en RecyclerView
@@ -92,15 +96,15 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
             if (libro.getImagenBase64() != null && !libro.getImagenBase64().isEmpty()) {
                 // Cargar desde Base64
                 try {
-                    byte[] decodedString = android.util.Base64.decode(
-                            libro.getImagenBase64(), android.util.Base64.DEFAULT);
-                    android.graphics.Bitmap bitmap = android.graphics.BitmapFactory
-                            .decodeByteArray(decodedString, 0, decodedString.length);
+                    byte[] decodedString = Base64.decode(
+                            libro.getImagenBase64(), Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(
+                            decodedString, 0, decodedString.length);
                     imgPortada.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     imgPortada.setImageResource(android.R.color.transparent);
-                    imgPortada.setBackgroundColor(itemView.getContext()
-                            .getResources().getColor(R.color.primary_light));
+                    imgPortada.setBackgroundColor(
+                            ContextCompat.getColor(itemView.getContext(), R.color.primary_light));
                 }
             } else if (libro.getUrlPortada() != null && !libro.getUrlPortada().isEmpty()) {
                 // Cargar desde URL con Glide
@@ -113,17 +117,18 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
             } else {
                 // Sin portada
                 imgPortada.setImageResource(android.R.color.transparent);
-                imgPortada.setBackgroundColor(itemView.getContext()
-                        .getResources().getColor(R.color.primary_light));
+                imgPortada.setBackgroundColor(
+                        ContextCompat.getColor(itemView.getContext(), R.color.primary_light));
             }
 
-            // Resto del código igual...
+            // Click normal: ver detalle
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alClickear(libro);
                 }
             });
 
+            // Long press: mostrar opciones
             itemView.setOnLongClickListener(v -> {
                 if (listener != null) {
                     listener.alMantenerPresionado(libro);
@@ -131,13 +136,17 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                 return true;
             });
 
+            // Botón editar
             btnEditar.setOnClickListener(v -> {
-                // TODO: Implementar edición
+                // TODO: Implementar edición en segunda entrega
             });
 
+            // Botón eliminar
             btnEliminar.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alMantenerPresionado(libro);
                 }
             });
         }
+    }
+}

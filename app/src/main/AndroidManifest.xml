@@ -3,7 +3,6 @@
     package="com.jfam.leido">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,16 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Leido">
 
-        <!-- SPLASH ACTIVITY (Pantalla de inicio) -->
+        <!-- AURELIA INTRO (Pantalla de lanzamiento) -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".AureliaIntroActivity"
             android:exported="true"
-            android:theme="@style/Theme.Leido.Splash">
+            android:theme="@style/Theme.Leido.AureliaIntro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- SPLASH ACTIVITY -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Leido.Splash"/>
 
         <!-- LOGIN ACTIVITY -->
         <activity
