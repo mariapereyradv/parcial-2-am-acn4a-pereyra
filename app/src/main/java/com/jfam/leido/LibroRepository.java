@@ -25,7 +25,7 @@ public class LibroRepository {
         gson = new Gson();
         cargarLibros();
 
-        // Si no hay libros, agregar ejemplos
+        // Si no hay libros, se ven ejemplos
         if (libros.isEmpty()) {
             agregarLibrosEjemplo();
         }
@@ -63,27 +63,29 @@ public class LibroRepository {
      * Agrega libros de ejemplo para pruebas
      */
     private void agregarLibrosEjemplo() {
+        // Usar URLs de HTTPS que funcion
         Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez",
                 "Sudamericana", "978-0-307-47472-8",
                 "Obra maestra del realismo mágico", true);
-        libro1.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/91TvVQS7loL.jpg");
+        libro1.setUrlPortada("https://m.media-amazon.com/images/I/81MI6+TpYyL._SY466_.jpg");
         libros.add(libro1);
 
-        Libro libro2 = new Libro("El nombre de la rosa", "Umberto Eco",
-                "Sudamericana", "978-0-15-601219-2",
-                "Misterio medieval fascinante", true);
-        libro2.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/91V0dL8PHJL.jpg");
+        Libro libro2 = new Libro("1984", "George Orwell",
+                "Secker & Warburg", "978-0-452-28423-4",
+                "Distopía clásica", true);
+        libro2.setUrlPortada("https://m.media-amazon.com/images/I/61ZewDE3beL._SY466_.jpg");
         libros.add(libro2);
 
-        Libro libro3 = new Libro("Rayuela", "Julio Cortázar",
-                "Sudamericana", "978-0-307-47423-0",
-                "Quiero leerlo pronto", false);
-        libro3.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/81k+I7RddBL.jpg");
+        Libro libro3 = new Libro("El principito", "Antoine de Saint-Exupéry",
+                "Reynal & Hitchcock", "978-0-156-01219-2",
+                "Quiero releerlo", false);
+        libro3.setUrlPortada("https://m.media-amazon.com/images/I/71OZY035FKL._SY466_.jpg");
         libros.add(libro3);
 
-        Libro libro4 = new Libro("Ficciones", "Jorge Luis Borges",
-                "Emecé", "978-0-8021-3545-0", "", false);
-        libro4.setUrlPortada("https://images-na.ssl-images-amazon.com/images/I/81fHK8sV6CL.jpg");
+        Libro libro4 = new Libro("Harry Potter", "J.K. Rowling",
+                "Bloomsbury", "978-0-439-70818-8",
+                "Para leer pronto", false);
+        libro4.setUrlPortada("https://m.media-amazon.com/images/I/81m1s4wIPML._SY466_.jpg");
         libros.add(libro4);
 
         guardarLibros();

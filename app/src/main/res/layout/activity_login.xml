@@ -111,17 +111,7 @@
             android:background="@drawable/edit_text_background"
             android:layout_marginBottom="@dimen/margin_small"/>
 
-        <!-- CHECKBOX POLÍTICAS -->
-        <CheckBox
-            android:id="@+id/checkPoliticas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_privacy"
-            android:textSize="@dimen/text_tiny"
-            android:textColor="@color/text_secondary"
-            android:buttonTint="@color/primary"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_xlarge"/>
+
 
         <!-- BOTÓN INICIAR SESIÓN -->
         <Button

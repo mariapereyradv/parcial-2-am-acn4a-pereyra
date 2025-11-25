@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Activity de Registro
- * Permite crear una nueva cuenta
+ *
  */
 public class RegistroActivity extends AppCompatActivity {
 
@@ -20,7 +20,6 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etContrasena;
     private EditText etConfirmarContrasena;
-    private CheckBox checkPoliticas;
     private Button btnRegistrarse;
     private TextView txtIniciarSesion;
     private SharedPreferences prefs;
@@ -44,7 +43,6 @@ public class RegistroActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etContrasena = findViewById(R.id.etContrasena);
         etConfirmarContrasena = findViewById(R.id.etConfirmarContrasena);
-        checkPoliticas = findViewById(R.id.checkPoliticas);
         btnRegistrarse = findViewById(R.id.btnRegistrarse);
         txtIniciarSesion = findViewById(R.id.txtIniciarSesion);
     }
@@ -97,11 +95,6 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
-        if (!checkPoliticas.isChecked()) {
-            Toast.makeText(this, getString(R.string.validation_accept_privacy),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         // Guardar usuario (sobrescribe el demo)
         prefs.edit()

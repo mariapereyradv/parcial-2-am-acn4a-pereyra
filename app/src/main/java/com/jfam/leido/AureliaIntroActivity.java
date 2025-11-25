@@ -68,7 +68,7 @@ public class AureliaIntroActivity extends AppCompatActivity {
         AnimatorSet pulso = new AnimatorSet();
         pulso.playTogether(pulsoScale, pulsoScaleY);
         pulso.setDuration(1500);
-        pulso.setRepeatCount(1);
+
         pulso.setInterpolator(new AccelerateDecelerateInterpolator());
         pulso.start();
 
