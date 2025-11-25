@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="@dimen/padding_large">
+
+    <!-- Portada -->
+    <ImageView
+        android:id="@+id/imgPortadaDetalle"
+        android:layout_width="160dp"
+        android:layout_height="240dp"
+        android:scaleType="centerCrop"
+        android:background="@color/primary_light"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/margin_large"/>
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/txtTituloDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Título del libro"
+        android:textSize="@dimen/text_headline_small"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/imgPortadaDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/margin_large"/>
+
+    <!-- Autor -->
+    <TextView
+        android:id="@+id/txtAutorDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Autor"
+        android:textSize="@dimen/text_subtitle"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/margin_small"/>
+
+    <!-- Editorial -->
+    <TextView
+        android:id="@+id/labelEditorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editorial:"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        app:layout_constraintTop_toBottomOf="@id/txtAutorDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_large"/>
+
+    <TextView
+        android:id="@+id/txtEditorialDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Editorial"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toTopOf="@id/labelEditorial"
+        app:layout_constraintStart_toEndOf="@id/labelEditorial"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/margin_small"/>
+
+    <!-- ISBN -->
+    <TextView
+        android:id="@+id/labelIsbn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISBN:"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        app:layout_constraintTop_toBottomOf="@id/labelEditorial"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_small"/>
+
+    <TextView
+        android:id="@+id/txtIsbnDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="ISBN"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toTopOf="@id/labelIsbn"
+        app:layout_constraintStart_toEndOf="@id/labelIsbn"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/margin_small"/>
+
+    <!-- Comentarios -->
+    <TextView
+        android:id="@+id/labelComentarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis notas:"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        app:layout_constraintTop_toBottomOf="@id/labelIsbn"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_large"/>
+
+    <TextView
+        android:id="@+id/txtComentarioDetalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Comentarios"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toBottomOf="@id/labelComentarios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/margin_small"/>
+
+    <!-- Botón Cerrar -->
+    <Button
+        android:id="@+id/btnCerrar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:text="CERRAR"
+        android:textColor="@color/white"
+        android:background="@drawable/button_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/margin_large"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
