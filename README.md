@@ -6,7 +6,7 @@
 
 ## 👤 Datos del Proyecto
 
-- **Estudiante:** Pereyra
+- **Estudiante:** Pereyra Maria
 - **Comisión:** ACN4A - Turno Noche
 - **Materia:** Aplicaciones Móviles - Parcial 2
 - **Año:** 2024
@@ -197,4 +197,4 @@ Libro {
 
 ##  Repositorio
 
-[github.com/TU_USUARIO/parcial-2-am-acn4a-pereyra](https://github.com/TU_USUARIO/parcial-2-am-acn4a-pereyra)
+https://github.com/mariapereyradv/parcial-2-am-acn4a-pereyra.git
