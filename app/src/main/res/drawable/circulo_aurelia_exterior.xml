@@ -4,7 +4,7 @@
     <gradient
         android:type="sweep"
         android:startColor="@color/secondary"
-        android:centerColor="@color/tertiary"
+        android:centerColor="@color/white"
         android:endColor="@color/primary"/>
     <size
         android:width="200dp"
