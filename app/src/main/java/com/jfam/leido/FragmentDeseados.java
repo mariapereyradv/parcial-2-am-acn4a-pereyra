@@ -1,6 +1,7 @@
 package com.jfam.leido;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,10 +51,15 @@ public class FragmentDeseados extends Fragment {
 
             @Override
             public void alClickear(Libro libro) {
-                // TODO: Abrir detalle del libro (segunda entrega)
-                Toast.makeText(requireContext(),
-                        getString(R.string.detalle_prefix) + libro.getTitulo(),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(requireContext(), DetalleLibroActivity.class);
+                intent.putExtra("titulo", libro.getTitulo());
+                intent.putExtra("autor", libro.getAutor());
+                intent.putExtra("editorial", libro.getEditorial());
+                intent.putExtra("isbn", libro.getIsbn());
+                intent.putExtra("comentario", libro.getComentario());
+                intent.putExtra("urlPortada", libro.getUrlPortada());
+                intent.putExtra("imagenBase64", libro.getImagenBase64());
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

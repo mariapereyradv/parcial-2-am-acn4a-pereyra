@@ -172,7 +172,6 @@
     <style name="Theme.Leido.AureliaIntro" parent="Theme.Leido">
         <item name="android:windowBackground">@color/primary_dark</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
-        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 

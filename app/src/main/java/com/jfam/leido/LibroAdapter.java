@@ -85,6 +85,9 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
         /**
          * Vincula los datos del libro con las vistas
          */
+        /**
+         * Vincula los datos del libro con las vistas
+         */
         public void vincular(Libro libro, OnLibroListener listener) {
             txtTitulo.setText(libro.getTitulo());
             String autorTexto = libro.getAutor().isEmpty() ?
@@ -92,43 +95,46 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                     libro.getAutor();
             txtAutor.setText(autorTexto);
 
-            // CARGAR IMAGEN: prioridad Base64, luego URL
-            if (libro.getImagenBase64() != null && !libro.getImagenBase64().isEmpty()) {
-                // Cargar desde Base64
+            // CARGAR IMAGEN con Glide (simplificado)
+            String urlPortada = libro.getUrlPortada();
+            String base64 = libro.getImagenBase64();
+
+            if (base64 != null && !base64.isEmpty()) {
+                // Tiene imagen Base64
                 try {
-                    byte[] decodedString = Base64.decode(
-                            libro.getImagenBase64(), Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(
-                            decodedString, 0, decodedString.length);
+                    byte[] decodedString = android.util.Base64.decode(base64, android.util.Base64.DEFAULT);
+                    android.graphics.Bitmap bitmap = android.graphics.BitmapFactory
+                            .decodeByteArray(decodedString, 0, decodedString.length);
                     imgPortada.setImageBitmap(bitmap);
                 } catch (Exception e) {
-                    imgPortada.setImageResource(android.R.color.transparent);
+                    // Error, usar color de fondo
                     imgPortada.setBackgroundColor(
-                            ContextCompat.getColor(itemView.getContext(), R.color.primary_light));
+                            androidx.core.content.ContextCompat.getColor(
+                                    itemView.getContext(), R.color.primary_light));
                 }
-            } else if (libro.getUrlPortada() != null && !libro.getUrlPortada().isEmpty()) {
-                // Cargar desde URL con Glide
-                Glide.with(itemView.getContext())
-                        .load(libro.getUrlPortada())
+            } else if (urlPortada != null && !urlPortada.isEmpty()) {
+                // Tiene URL
+                com.bumptech.glide.Glide.with(itemView.getContext())
+                        .load(urlPortada)
                         .placeholder(R.color.primary_light)
                         .error(R.color.primary_light)
                         .centerCrop()
                         .into(imgPortada);
             } else {
-                // Sin portada
-                imgPortada.setImageResource(android.R.color.transparent);
+                // Sin imagen
+                imgPortada.setImageDrawable(null);
                 imgPortada.setBackgroundColor(
-                        ContextCompat.getColor(itemView.getContext(), R.color.primary_light));
+                        androidx.core.content.ContextCompat.getColor(
+                                itemView.getContext(), R.color.primary_light));
             }
 
-            // Click normal: ver detalle
+            // Eventos
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alClickear(libro);
                 }
             });
 
-            // Long press: mostrar opciones
             itemView.setOnLongClickListener(v -> {
                 if (listener != null) {
                     listener.alMantenerPresionado(libro);
@@ -136,17 +142,15 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                 return true;
             });
 
-            // Botón editar
             btnEditar.setOnClickListener(v -> {
-                // TODO: Implementar edición en segunda entrega
+                // TODO: Implementar edición
             });
 
-            // Botón eliminar
             btnEliminar.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alMantenerPresionado(libro);
                 }
             });
         }
-    }
+}
 }

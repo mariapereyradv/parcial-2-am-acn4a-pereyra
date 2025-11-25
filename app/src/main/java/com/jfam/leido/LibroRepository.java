@@ -63,28 +63,33 @@ public class LibroRepository {
      * Agrega libros de ejemplo para pruebas
      */
     private void agregarLibrosEjemplo() {
-        // Usar URLs de HTTPS que funcion
+        libros.clear(); // Limpiar antes de agregar
+
+        // Libro 1: Con portada de URL
         Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez",
                 "Sudamericana", "978-0-307-47472-8",
                 "Obra maestra del realismo mágico", true);
         libro1.setUrlPortada("https://m.media-amazon.com/images/I/81MI6+TpYyL._SY466_.jpg");
         libros.add(libro1);
 
+        // Libro 2: Con portada
         Libro libro2 = new Libro("1984", "George Orwell",
                 "Secker & Warburg", "978-0-452-28423-4",
-                "Distopía clásica", true);
+                "Distopía clásica sobre el totalitarismo", true);
         libro2.setUrlPortada("https://m.media-amazon.com/images/I/61ZewDE3beL._SY466_.jpg");
         libros.add(libro2);
 
+        // Libro 3: Con portada
         Libro libro3 = new Libro("El principito", "Antoine de Saint-Exupéry",
                 "Reynal & Hitchcock", "978-0-156-01219-2",
-                "Quiero releerlo", false);
+                "Quiero releerlo pronto", false);
         libro3.setUrlPortada("https://m.media-amazon.com/images/I/71OZY035FKL._SY466_.jpg");
         libros.add(libro3);
 
+        // Libro 4: Con portada
         Libro libro4 = new Libro("Harry Potter", "J.K. Rowling",
                 "Bloomsbury", "978-0-439-70818-8",
-                "Para leer pronto", false);
+                "Para las vacaciones", false);
         libro4.setUrlPortada("https://m.media-amazon.com/images/I/81m1s4wIPML._SY466_.jpg");
         libros.add(libro4);
 
@@ -139,5 +144,14 @@ public class LibroRepository {
     public void cambiarEstado(Libro libro) {
         libro.setEsLeido(!libro.esLeido());
         guardarLibros();
+    }
+
+    /**
+     * Limpia todos los datos y recrea ejemplos
+     */
+    public void resetearDatos() {
+        libros.clear();
+        prefs.edit().clear().apply();
+        agregarLibrosEjemplo();
     }
 }

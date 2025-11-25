@@ -1,6 +1,7 @@
 package com.jfam.leido;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // TEMPORAL: FORZAR RESET
+        // SharedPreferences prefs = getSharedPreferences("libros_guardados", MODE_PRIVATE);
+        // prefs.edit().clear().apply();
+        //LibroRepository.obtenerInstancia(this).resetearDatos();
 
         inicializarVistas();
         configurarTabs();
