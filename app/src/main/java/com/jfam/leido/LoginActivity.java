@@ -1,41 +1,45 @@
 package com.jfam.leido;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-/**
- * Activity de Login
- * Usuario demo: demo / 1234
- */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail;
     private EditText etContrasena;
     private Button btnIniciarSesion;
     private TextView txtRegistrarse;
-    private SharedPreferences prefs;
+
+    // Firebase Authentication
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inicializar Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Verificar si ya hay sesión activa
+        FirebaseUser usuarioActual = mAuth.getCurrentUser();
+        if (usuarioActual != null) {
+            // Ya hay sesión, ir directo a Main
+            irAMain();
+            return;
+        }
+
         setContentView(R.layout.activity_login);
-
-        prefs = getSharedPreferences("leido_prefs", MODE_PRIVATE);
-
         inicializarVistas();
-        crearUsuarioDemo();
         configurarBotones();
     }
 
-    /**
-     * Inicializa las referencias de las vistas
-     */
     private void inicializarVistas() {
         etEmail = findViewById(R.id.etEmail);
         etContrasena = findViewById(R.id.etContrasena);
@@ -43,22 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         txtRegistrarse = findViewById(R.id.txtRegistrarse);
     }
 
-    /**
-     * Crea el usuario demo para pruebas
-     */
-    private void crearUsuarioDemo() {
-        if (!prefs.contains("demo_creado")) {
-            prefs.edit()
-                    .putString("usuario_demo", "demo")
-                    .putString("contrasena_demo", "1234")
-                    .putBoolean("demo_creado", true)
-                    .apply();
-        }
-    }
-
-    /**
-     * Configura el comportamiento de los botones
-     */
     private void configurarBotones() {
         btnIniciarSesion.setOnClickListener(v -> iniciarSesion());
 
@@ -68,33 +56,51 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Valida credenciales e inicia sesión
-     */
     private void iniciarSesion() {
         String email = etEmail.getText().toString().trim();
         String contrasena = etContrasena.getText().toString();
 
+        // Validaciones
         if (email.isEmpty() || contrasena.isEmpty()) {
             Toast.makeText(this, getString(R.string.validation_empty_fields),
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Validar con usuario demo
-        String usuarioDemo = prefs.getString("usuario_demo", "");
-        String contrasenaDemo = prefs.getString("contrasena_demo", "");
-
-        if (email.equals(usuarioDemo) && contrasena.equals(contrasenaDemo)) {
-            // Login exitoso
-            prefs.edit().putBoolean("sesion_activa", true).apply();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            // Login fallido
-            Toast.makeText(this, getString(R.string.validation_credentials_error),
-                    Toast.LENGTH_LONG).show();
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError(getString(R.string.validation_email_invalid));
+            etEmail.requestFocus();
+            return;
         }
+
+        // Mostrar loading
+        btnIniciarSesion.setEnabled(false);
+        btnIniciarSesion.setText("Iniciando...");
+
+        // Login con Firebase
+        mAuth.signInWithEmailAndPassword(email, contrasena)
+                .addOnCompleteListener(this, task -> {
+                    btnIniciarSesion.setEnabled(true);
+                    btnIniciarSesion.setText(getString(R.string.login_button));
+
+                    if (task.isSuccessful()) {
+                        // Login exitoso
+                        Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show();
+                        irAMain();
+                    } else {
+                        // Error
+                        String error = task.getException() != null ?
+                                task.getException().getMessage() :
+                                "Error desconocido";
+                        Toast.makeText(this, "Error: " + error,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void irAMain() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

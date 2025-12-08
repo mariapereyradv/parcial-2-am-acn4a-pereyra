@@ -87,8 +87,12 @@ public class MainActivity extends AppCompatActivity {
             dialogo.show(getSupportFragmentManager(), "DialogAgregarLibro");
         });
 
-        // Icono de perfil - cierra sesión
+        // Icono de perfil - cerrar sesión
         imgPerfil.setOnClickListener(v -> {
+            // Cerrar sesión de Firebase
+            com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
+
+            // Ir al login
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

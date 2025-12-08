@@ -1,19 +1,16 @@
 package com.jfam.leido;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
-/**
- * Activity de Registro
- *
- */
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText etNombreUsuario;
@@ -22,22 +19,21 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText etConfirmarContrasena;
     private Button btnRegistrarse;
     private TextView txtIniciarSesion;
-    private SharedPreferences prefs;
+
+    // Firebase Authentication
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        prefs = getSharedPreferences("leido_prefs", MODE_PRIVATE);
+        mAuth = FirebaseAuth.getInstance();
 
         inicializarVistas();
         configurarBotones();
     }
 
-    /**
-     * Inicializa las referencias de las vistas
-     */
     private void inicializarVistas() {
         etNombreUsuario = findViewById(R.id.etNombreUsuario);
         etEmail = findViewById(R.id.etEmail);
@@ -47,22 +43,14 @@ public class RegistroActivity extends AppCompatActivity {
         txtIniciarSesion = findViewById(R.id.txtIniciarSesion);
     }
 
-    /**
-     * Configura el comportamiento de los botones
-     */
     private void configurarBotones() {
         btnRegistrarse.setOnClickListener(v -> registrarUsuario());
 
         txtIniciarSesion.setOnClickListener(v -> {
-            Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            finish(); // Volver al login
         });
     }
 
-    /**
-     * Valida los datos y registra al usuario
-     */
     private void registrarUsuario() {
         String nombreUsuario = etNombreUsuario.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
@@ -83,8 +71,8 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
-        if (contrasena.length() < 4) {
-            etContrasena.setError(getString(R.string.validation_password_short));
+        if (contrasena.length() < 6) {
+            etContrasena.setError("La contraseña debe tener al menos 6 caracteres");
             etContrasena.requestFocus();
             return;
         }
@@ -95,19 +83,43 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
+        // Mostrar loading
+        btnRegistrarse.setEnabled(false);
+        btnRegistrarse.setText("Registrando...");
 
-        // Guardar usuario (sobrescribe el demo)
-        prefs.edit()
-                .putString("usuario_demo", nombreUsuario)
-                .putString("contrasena_demo", contrasena)
-                .putString("email_usuario", email)
-                .apply();
+        // Registro con Firebase
+        mAuth.createUserWithEmailAndPassword(email, contrasena)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Registro exitoso
+                        FirebaseUser user = mAuth.getCurrentUser();
 
-        Toast.makeText(this, getString(R.string.registro_exitoso), Toast.LENGTH_SHORT).show();
+                        // Actualizar nombre de usuario
+                        if (user != null) {
+                            UserProfileChangeRequest profileUpdates =
+                                    new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(nombreUsuario)
+                                            .build();
 
-        // Ir al login
-        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(updateTask -> {
+                                        Toast.makeText(this,
+                                                getString(R.string.registro_exitoso),
+                                                Toast.LENGTH_SHORT).show();
+                                        finish(); // Volver al login
+                                    });
+                        }
+                    } else {
+                        // Error
+                        btnRegistrarse.setEnabled(true);
+                        btnRegistrarse.setText(getString(R.string.register_button));
+
+                        String error = task.getException() != null ?
+                                task.getException().getMessage() :
+                                "Error desconocido";
+                        Toast.makeText(this, "Error: " + error,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }
