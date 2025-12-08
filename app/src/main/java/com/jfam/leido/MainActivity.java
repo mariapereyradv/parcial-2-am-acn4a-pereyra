@@ -89,13 +89,30 @@ public class MainActivity extends AppCompatActivity {
 
         // Icono de perfil - cerrar sesión
         imgPerfil.setOnClickListener(v -> {
-            // Cerrar sesión de Firebase
-            com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
+            // Obtener email del usuario
+            com.google.firebase.auth.FirebaseUser user =
+                    com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+            String email = user != null && user.getEmail() != null ? user.getEmail() : "usuario";
 
-            // Ir al login
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            new android.app.AlertDialog.Builder(this)
+                    .setTitle("Cerrar sesión")
+                    .setMessage("¿Querés cerrar sesión de " + email + "?")
+                    .setPositiveButton("Sí, cerrar sesión", (dialog, which) -> {
+                        // Cerrar sesión
+                        com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
+
+                        // Ir al login
+                        android.content.Intent intent = new android.content.Intent(
+                                MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                        android.widget.Toast.makeText(this,
+                                "Sesión cerrada correctamente",
+                                android.widget.Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
         });
     }
 
