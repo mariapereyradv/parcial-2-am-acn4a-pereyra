@@ -22,6 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import com.bumptech.glide.Glide;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Diálogo para agregar un nuevo libro
@@ -224,27 +225,51 @@ public class DialogAgregarLibro extends DialogFragment {
         String isbn = etIsbn.getText().toString().trim();
         String comentario = etComentario.getText().toString().trim();
 
-        // Crear y configurar libro
+        // Crear libro
         Libro nuevoLibro = new Libro(titulo, autor, editorial, isbn, comentario, esLeido);
 
-        // Asignar portada (URL o Base64)
+        // Asignar portada
         if (!imagenBase64.isEmpty()) {
             nuevoLibro.setImagenBase64(imagenBase64);
         } else if (!urlPortada.isEmpty()) {
             nuevoLibro.setUrlPortada(urlPortada);
         }
 
-        LibroRepository.obtenerInstancia(requireContext()).agregarLibro(nuevoLibro);
+        // Guardar en Firestore
+        LibroRepository.obtenerInstancia().agregarLibro(nuevoLibro,
+                new LibroRepository.OnOperacionListener() {
+                    @Override
+                    public void onExito(String mensaje) {
+                        Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show();
 
-        // Refrescar vista principal
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).refrescarFragmentoActual();
-        }
+                        // Refrescar MainActivity - FORZAR RECARGA DESDE FIRESTORE
+                        if (getActivity() instanceof MainActivity) {
+                            MainActivity mainActivity = (MainActivity) getActivity();
+                            // Recargar datos desde Firestore
+                            LibroRepository.obtenerInstancia().cargarLibros(
+                                    new LibroRepository.OnLibrosListener() {
+                                        @Override
+                                        public void onLibrosCargados(List<Libro> libros) {
+                                            mainActivity.refrescarFragmentoActual();
+                                        }
 
-        String mensaje = esLeido ? "Libro agregado a Leídos" : "Libro agregado a Deseados";
-        Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show();
+                                        @Override
+                                        public void onError(String error) {
+                                            // Ignorar error silencioso
+                                        }
+                                    }
+                            );
+                        }
 
-        dismiss();
+                        dismiss();
+                    }
+
+                    @Override
+                    public void onError(String mensaje) {
+                        Toast.makeText(requireContext(), "Error: " + mensaje,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
