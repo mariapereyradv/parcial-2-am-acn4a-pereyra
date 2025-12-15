@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 /**
  * Fragmento que muestra la lista de libros deseados
  * VERSIÓN SIN EMPTY STATE (para evitar errores)
@@ -29,7 +31,7 @@ public class FragmentDeseados extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_deseados, container, false);
 
-        repositorio = LibroRepository.obtenerInstancia(requireContext());
+        repositorio = LibroRepository.obtenerInstancia();
         recyclerView = vista.findViewById(R.id.recyclerDeseados);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -80,19 +82,35 @@ public class FragmentDeseados extends Fragment {
                 .setItems(opciones, (dialog, which) -> {
                     switch (which) {
                         case 0: // Marcar como leído
-                            repositorio.cambiarEstado(libro);
-                            refrescarLista();
-                            refrescarFragmentoLeidos();
-                            Toast.makeText(requireContext(),
-                                    getString(R.string.msg_marcado_leido, libro.getTitulo()),
-                                    Toast.LENGTH_SHORT).show();
+                            repositorio.cambiarEstado(libro, new LibroRepository.OnOperacionListener() {
+                                @Override
+                                public void onExito(String mensaje) {
+                                    refrescarLista();
+                                    refrescarFragmentoLeidos();
+                                    Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onError(String mensaje) {
+                                    Toast.makeText(requireContext(), "Error: " + mensaje,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             break;
                         case 1: // Eliminar
-                            repositorio.eliminarLibro(libro);
-                            refrescarLista();
-                            Toast.makeText(requireContext(),
-                                    getString(R.string.libro_eliminado_deseados),
-                                    Toast.LENGTH_SHORT).show();
+                            repositorio.eliminarLibro(libro, new LibroRepository.OnOperacionListener() {
+                                @Override
+                                public void onExito(String mensaje) {
+                                    refrescarLista();
+                                    Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onError(String mensaje) {
+                                    Toast.makeText(requireContext(), "Error: " + mensaje,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             break;
                         case 2: // Cancelar
                             break;
@@ -115,7 +133,21 @@ public class FragmentDeseados extends Fragment {
      */
     public void refrescarLista() {
         if (adapter != null) {
-            adapter.actualizarLibros(repositorio.obtenerDeseados());
+            // Recargar desde el repositorio
+            LibroRepository.obtenerInstancia().cargarLibros(
+                    new LibroRepository.OnLibrosListener() {
+                        @Override
+                        public void onLibrosCargados(List<Libro> libros) {
+                            adapter.actualizarLibros(LibroRepository.obtenerInstancia().obtenerDeseados());
+                        }
+
+                        @Override
+                        public void onError(String mensaje) {
+                            Toast.makeText(requireContext(), "Error: " + mensaje,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
         }
     }
 }
