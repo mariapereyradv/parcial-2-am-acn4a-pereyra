@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+
 /**
  * Fragmento que muestra la lista de libros leídos
  *
@@ -29,7 +32,7 @@ public class FragmentLeidos extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_leidos, container, false);
 
-        repositorio = LibroRepository.obtenerInstancia(requireContext());
+        repositorio = LibroRepository.obtenerInstancia();
         recyclerView = vista.findViewById(R.id.recyclerLeidos);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -74,10 +77,19 @@ public class FragmentLeidos extends Fragment {
                 .setTitle(getString(R.string.dialog_eliminar_title))
                 .setMessage(getString(R.string.dialog_eliminar_message, libro.getTitulo()))
                 .setPositiveButton(getString(R.string.dialog_eliminar_confirm), (dialog, which) -> {
-                    repositorio.eliminarLibro(libro);
-                    refrescarLista();
-                    Toast.makeText(requireContext(), getString(R.string.msg_libro_eliminado),
-                            Toast.LENGTH_SHORT).show();
+                    repositorio.eliminarLibro(libro, new LibroRepository.OnOperacionListener() {
+                        @Override
+                        public void onExito(String mensaje) {
+                            refrescarLista();
+                            Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError(String mensaje) {
+                            Toast.makeText(requireContext(), "Error: " + mensaje,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 })
                 .setNegativeButton(getString(R.string.dialog_cancelar), null)
                 .show();
@@ -88,7 +100,21 @@ public class FragmentLeidos extends Fragment {
      */
     public void refrescarLista() {
         if (adapter != null) {
-            adapter.actualizarLibros(repositorio.obtenerLeidos());
+            // Recargar desde el repositorio
+            LibroRepository.obtenerInstancia().cargarLibros(
+                    new LibroRepository.OnLibrosListener() {
+                        @Override
+                        public void onLibrosCargados(List<Libro> libros) {
+                            adapter.actualizarLibros(LibroRepository.obtenerInstancia().obtenerLeidos());
+                        }
+
+                        @Override
+                        public void onError(String mensaje) {
+                            Toast.makeText(requireContext(), "Error: " + mensaje,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
         }
     }
 }
