@@ -1,157 +1,203 @@
 package com.jfam.leido;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
+import android.util.Log;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Repositorio singleton para gestionar los libros
- * Usa SharedPreferences para persistencia
- */
 public class LibroRepository {
+    private static final String TAG = "LibroRepository";
     private static LibroRepository instancia;
-    private List<Libro> libros;
-    private SharedPreferences prefs;
-    private Gson gson;
-    private static final String PREF_LIBROS = "libros_guardados";
-    private static final String KEY_LIBROS = "lista_libros";
 
-    private LibroRepository(Context context) {
-        prefs = context.getSharedPreferences(PREF_LIBROS, Context.MODE_PRIVATE);
-        gson = new Gson();
-        cargarLibros();
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private List<Libro> librosCache;
 
-        // Si no hay libros, se ven ejemplos
-        if (libros.isEmpty()) {
-            agregarLibrosEjemplo();
-        }
+    private LibroRepository() {
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        librosCache = new ArrayList<>();
     }
 
-    public static synchronized LibroRepository obtenerInstancia(Context context) {
+    public static synchronized LibroRepository obtenerInstancia() {
         if (instancia == null) {
-            instancia = new LibroRepository(context.getApplicationContext());
+            instancia = new LibroRepository();
         }
         return instancia;
     }
 
-    /**
-     * Carga los libros desde SharedPreferences
-     */
-    private void cargarLibros() {
-        String json = prefs.getString(KEY_LIBROS, null);
-        if (json != null) {
-            Type tipo = new TypeToken<ArrayList<Libro>>(){}.getType();
-            libros = gson.fromJson(json, tipo);
-        } else {
-            libros = new ArrayList<>();
+    private String getUserId() {
+        return mAuth.getCurrentUser() != null ?
+                mAuth.getCurrentUser().getUid() : "";
+    }
+
+    public void cargarLibros(OnLibrosListener listener) {
+        String userId = getUserId();
+        if (userId.isEmpty()) {
+            listener.onError("Usuario no autenticado");
+            return;
         }
+
+        db.collection("usuarios")
+                .document(userId)
+                .collection("libros")
+                .orderBy("titulo", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    librosCache.clear();
+                    librosCache.addAll(
+                            queryDocumentSnapshots.toObjects(Libro.class)
+                    );
+                    Log.d(TAG, "Libros cargados: " + librosCache.size());
+                    listener.onLibrosCargados(librosCache);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error al cargar libros", e);
+                    listener.onError(e.getMessage());
+                });
     }
 
-    /**
-     * Guarda los libros en SharedPreferences
-     */
-    private void guardarLibros() {
-        String json = gson.toJson(libros);
-        prefs.edit().putString(KEY_LIBROS, json).apply();
-    }
-
-    /**
-     * Agrega libros de ejemplo para pruebas
-     */
-    private void agregarLibrosEjemplo() {
-        libros.clear(); // Limpiar antes de agregar
-
-        // Libro 1: Con portada de URL
-        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez",
-                "Sudamericana", "978-0-307-47472-8",
-                "Obra maestra del realismo mágico", true);
-        libro1.setUrlPortada("https://m.media-amazon.com/images/I/81MI6+TpYyL._SY466_.jpg");
-        libros.add(libro1);
-
-        // Libro 2: Con portada
-        Libro libro2 = new Libro("1984", "George Orwell",
-                "Secker & Warburg", "978-0-452-28423-4",
-                "Distopía clásica sobre el totalitarismo", true);
-        libro2.setUrlPortada("https://m.media-amazon.com/images/I/61ZewDE3beL._SY466_.jpg");
-        libros.add(libro2);
-
-        // Libro 3: Con portada
-        Libro libro3 = new Libro("El principito", "Antoine de Saint-Exupéry",
-                "Reynal & Hitchcock", "978-0-156-01219-2",
-                "Quiero releerlo pronto", false);
-        libro3.setUrlPortada("https://m.media-amazon.com/images/I/71OZY035FKL._SY466_.jpg");
-        libros.add(libro3);
-
-        // Libro 4: Con portada
-        Libro libro4 = new Libro("Harry Potter", "J.K. Rowling",
-                "Bloomsbury", "978-0-439-70818-8",
-                "Para las vacaciones", false);
-        libro4.setUrlPortada("https://m.media-amazon.com/images/I/81m1s4wIPML._SY466_.jpg");
-        libros.add(libro4);
-
-        guardarLibros();
-    }
-
-    /**
-     * Obtiene todos los libros leídos
-     */
     public List<Libro> obtenerLeidos() {
         List<Libro> leidos = new ArrayList<>();
-        for (Libro libro : libros) {
-            if (libro.esLeido()) {
+        for (Libro libro : librosCache) {
+            if (libro.isEsLeido()) {
                 leidos.add(libro);
             }
         }
         return leidos;
     }
 
-    /**
-     * Obtiene todos los libros deseados
-     */
     public List<Libro> obtenerDeseados() {
         List<Libro> deseados = new ArrayList<>();
-        for (Libro libro : libros) {
-            if (!libro.esLeido()) {
+        for (Libro libro : librosCache) {
+            if (!libro.isEsLeido()) {
                 deseados.add(libro);
             }
         }
         return deseados;
     }
 
-    /**
-     * Agrega un nuevo libro al inicio de la lista
-     */
-    public void agregarLibro(Libro libro) {
-        libros.add(0, libro);
-        guardarLibros();
+    public void agregarLibro(Libro libro, OnOperacionListener listener) {
+        String userId = getUserId();
+        if (userId.isEmpty()) {
+            listener.onError("Usuario no autenticado");
+            return;
+        }
+
+        libro.setUserId(userId);
+
+        db.collection("usuarios")
+                .document(userId)
+                .collection("libros")
+                .add(libro)
+                .addOnSuccessListener(documentReference -> {
+                    libro.setId(documentReference.getId());
+                    librosCache.add(0, libro);
+                    Log.d(TAG, "Libro agregado: " + libro.getTitulo());
+                    listener.onExito("Libro agregado");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error al agregar libro", e);
+                    listener.onError(e.getMessage());
+                });
     }
 
-    /**
-     * Elimina un libro
-     */
-    public void eliminarLibro(Libro libro) {
-        libros.remove(libro);
-        guardarLibros();
+    public void eliminarLibro(Libro libro, OnOperacionListener listener) {
+        String userId = getUserId();
+        if (userId.isEmpty() || libro.getId() == null) {
+            listener.onError("Error al eliminar");
+            return;
+        }
+
+        db.collection("usuarios")
+                .document(userId)
+                .collection("libros")
+                .document(libro.getId())
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    librosCache.remove(libro);
+                    Log.d(TAG, "Libro eliminado: " + libro.getTitulo());
+                    listener.onExito("Libro eliminado");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error al eliminar libro", e);
+                    listener.onError(e.getMessage());
+                });
     }
 
-    /**
-     * Cambia el estado de un libro (leído <-> deseado)
-     */
-    public void cambiarEstado(Libro libro) {
-        libro.setEsLeido(!libro.esLeido());
-        guardarLibros();
+    public void cambiarEstado(Libro libro, OnOperacionListener listener) {
+        String userId = getUserId();
+        if (userId.isEmpty() || libro.getId() == null) {
+            listener.onError("Error al actualizar");
+            return;
+        }
+
+        libro.setEsLeido(!libro.isEsLeido());
+
+        db.collection("usuarios")
+                .document(userId)
+                .collection("libros")
+                .document(libro.getId())
+                .update("esLeido", libro.isEsLeido())
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Estado cambiado: " + libro.getTitulo());
+                    listener.onExito("Estado actualizado");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error al cambiar estado", e);
+                    libro.setEsLeido(!libro.isEsLeido());
+                    listener.onError(e.getMessage());
+                });
     }
 
-    /**
-     * Limpia todos los datos y recrea ejemplos
-     */
-    public void resetearDatos() {
-        libros.clear();
-        prefs.edit().clear().apply();
-        agregarLibrosEjemplo();
+    public void crearLibrosEjemplo(OnOperacionListener listener) {
+        if (!librosCache.isEmpty()) {
+            listener.onExito("Ya hay libros");
+            return;
+        }
+
+        String userId = getUserId();
+        if (userId.isEmpty()) {
+            listener.onError("Usuario no autenticado");
+            return;
+        }
+
+        List<Libro> ejemplos = new ArrayList<>();
+
+        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez",
+                "Sudamericana", "978-0-307-47472-8",
+                "Obra maestra del realismo mágico", true);
+        libro1.setUrlPortada("https://m.media-amazon.com/images/I/81MI6+TpYyL._SY466_.jpg");
+        libro1.setUserId(userId);
+        ejemplos.add(libro1);
+
+        Libro libro2 = new Libro("1984", "George Orwell",
+                "Secker & Warburg", "978-0-452-28423-4",
+                "Distopía clásica sobre el totalitarismo", true);
+        libro2.setUrlPortada("https://m.media-amazon.com/images/I/61ZewDE3beL._SY466_.jpg");
+        libro2.setUserId(userId);
+        ejemplos.add(libro2);
+
+        for (Libro libro : ejemplos) {
+            db.collection("usuarios")
+                    .document(userId)
+                    .collection("libros")
+                    .add(libro);
+        }
+
+        librosCache.addAll(ejemplos);
+        listener.onExito("Libros de ejemplo creados");
+    }
+
+    public interface OnLibrosListener {
+        void onLibrosCargados(List<Libro> libros);
+        void onError(String mensaje);
+    }
+
+    public interface OnOperacionListener {
+        void onExito(String mensaje);
+        void onError(String mensaje);
     }
 }
