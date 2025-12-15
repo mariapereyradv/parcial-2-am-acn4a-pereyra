@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import java.util.List;
+import android.widget.Toast;
 
 /**
  * Activity Principal - Maneja la navegación entre fragmentos
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         inicializarVistas();
         configurarTabs();
         configurarBotones();
+
+        cargarLibrosDesdeFirestore();
 
         // Mostrar fragmento de Leídos por defecto
         if (savedInstanceState == null) {
@@ -138,5 +142,26 @@ public class MainActivity extends AppCompatActivity {
         } else if (fragmentoActual instanceof FragmentDeseados) {
             ((FragmentDeseados) fragmentoActual).refrescarLista();
         }
+    }
+
+    /**
+     * Carga los libros desde Firestore al iniciar
+     */
+    private void cargarLibrosDesdeFirestore() {
+        LibroRepository.obtenerInstancia().cargarLibros(
+                new LibroRepository.OnLibrosListener() {
+                    @Override
+                    public void onLibrosCargados(List<Libro> libros) {
+                        // Solo refrescar, sin crear libros de ejemplo
+                        refrescarFragmentoActual();
+                    }
+
+                    @Override
+                    public void onError(String mensaje) {
+                        Toast.makeText(MainActivity.this,
+                                "Error al cargar libros: " + mensaje, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 }
