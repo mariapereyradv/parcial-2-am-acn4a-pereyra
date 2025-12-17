@@ -26,13 +26,16 @@
                 android:layout_height="match_parent"
                 android:background="@color/primary_light"
                 android:scaleType="centerCrop"
+                android:elevation="2dp"
                 android:contentDescription="@string/cd_book_cover"/>
 
             <!-- Borde decorativo -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/edit_text_background"/>
+                android:background="@drawable/edit_text_background"
+                android:clickable="false"
+                android:focusable="false"/>
         </FrameLayout>
 
         <!-- INFORMACIÓN -->

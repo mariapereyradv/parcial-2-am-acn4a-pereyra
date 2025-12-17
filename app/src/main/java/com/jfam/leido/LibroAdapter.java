@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
+import android.graphics.Color;
+import android.util.Base64;
+import android.util.Log;
+import androidx.core.content.ContextCompat;
 
 /**
  * Adaptador para mostrar la lista de libros en RecyclerView
@@ -85,9 +88,7 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
         /**
          * Vincula los datos del libro con las vistas
          */
-        /**
-         * Vincula los datos del libro con las vistas
-         */
+
         public void vincular(Libro libro, OnLibroListener listener) {
             txtTitulo.setText(libro.getTitulo());
             String autorTexto = libro.getAutor().isEmpty() ?
@@ -95,40 +96,51 @@ public class LibroAdapter extends RecyclerView.Adapter<LibroAdapter.LibroViewHol
                     libro.getAutor();
             txtAutor.setText(autorTexto);
 
-            // CARGAR IMAGEN con Glide (simplificado)
+            // LIMPIAR VISTA PRIMERO
+            imgPortada.setImageDrawable(null);
+            imgPortada.setBackgroundColor(Color.TRANSPARENT);
+
+            // CARGAR IMAGEN
             String urlPortada = libro.getUrlPortada();
             String base64 = libro.getImagenBase64();
 
-            if (base64 != null && !base64.isEmpty()) {
+            boolean tieneImagen = false;
+
+            if (base64 != null && !base64.trim().isEmpty()) {
                 // Tiene imagen Base64
                 try {
-                    byte[] decodedString = android.util.Base64.decode(base64, android.util.Base64.DEFAULT);
-                    android.graphics.Bitmap bitmap = android.graphics.BitmapFactory
-                            .decodeByteArray(decodedString, 0, decodedString.length);
-                    imgPortada.setImageBitmap(bitmap);
+                    byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(
+                            decodedString, 0, decodedString.length
+                    );
+                    if (bitmap != null) {
+                        imgPortada.setImageBitmap(bitmap);
+                        tieneImagen = true;
+                    }
                 } catch (Exception e) {
-                    // Error, usar color de fondo
-                    imgPortada.setBackgroundColor(
-                            androidx.core.content.ContextCompat.getColor(
-                                    itemView.getContext(), R.color.primary_light));
+                    Log.e("LibroAdapter", "Error al decodificar Base64", e);
                 }
-            } else if (urlPortada != null && !urlPortada.isEmpty()) {
+            }
+
+            if (!tieneImagen && urlPortada != null && !urlPortada.trim().isEmpty()) {
                 // Tiene URL
-                com.bumptech.glide.Glide.with(itemView.getContext())
+                Glide.with(itemView.getContext())
                         .load(urlPortada)
-                        .placeholder(R.color.primary_light)
+                        .placeholder(android.R.color.transparent)
                         .error(R.color.primary_light)
                         .centerCrop()
                         .into(imgPortada);
-            } else {
-                // Sin imagen
-                imgPortada.setImageDrawable(null);
-                imgPortada.setBackgroundColor(
-                        androidx.core.content.ContextCompat.getColor(
-                                itemView.getContext(), R.color.primary_light));
+                tieneImagen = true;
             }
 
-            // Eventos
+            if (!tieneImagen) {
+                // Sin imagen - mostrar color de fondo
+                imgPortada.setBackgroundColor(
+                        androidx.core.content.ContextCompat.getColor(itemView.getContext(), R.color.primary_light)
+                );
+            }
+
+            // Eventos (mantener igual)
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.alClickear(libro);

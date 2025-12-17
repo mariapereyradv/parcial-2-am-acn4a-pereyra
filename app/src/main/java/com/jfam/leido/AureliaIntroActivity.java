@@ -12,6 +12,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 /**
  * Pantalla de introducción animada del Universo Aurelia
  * Muestra una animación de 2.5 segundos antes del Splash
